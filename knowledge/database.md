@@ -96,7 +96,6 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 When proposing schema changes, treat the following as **known debt, not acceptable patterns to replicate**:
 1. `conversation_views` — RLS disabled
 2. `messages` — RLS pending re-enable
-3. `snippets`, `trigger_links`, `automation_enrollments` — likely missing `business_id`, marked "unrestricted"
-4. `deals` — missing proper `contact_id` FK
+3. **`snippets`, `trigger_links` likely missing `business_id`** — affects Snippets, Trigger Links. Note: `automation_enrollments` business_id gap resolved as part of Reputation Management build.4. `deals` — missing proper `contact_id` FK
 
 Do not copy these patterns into new tables. New tables must follow Business Rules in full from creation.

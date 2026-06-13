@@ -219,7 +219,11 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Description:** Long-term roadmap items, not yet started.
 - **Tables:** None yet.
 - **Issues:** N/A.
-
+### Reputation Management (Review Requests)
+- **Status:** Built
+- **Description:** Post-appointment review request via SMS. Businesses set their Google/Facebook review links and send delay in Settings (Reviews tab, index 25). Uses existing Automation Builder — appointment_completed trigger + send_review_request action. One-click template enables the flow per business.
+- **Tables:** `businesses` (google_review_link, facebook_review_link, review_request_delay_minutes), `automations`, `automation_enrollments`, `automation_logs`
+- **Issues:** None known.
 ### Missed Call Text Back
 - **Status:** Not Started
 - **Description:** Long-term roadmap item.
@@ -306,8 +310,7 @@ These affect multiple areas above and should be considered before AI agents prop
 
 1. **`messages` RLS pending re-enable** — affects Conversations, AI SMS flow, AI Chat Widget.
 2. **`conversation_views` RLS disabled** — affects Saved Filter Views.
-3. **`snippets`, `trigger_links`, `automation_enrollments` likely missing `business_id`** — affects Snippets, Trigger Links, Automation Enrollments/Sidebar.
-4. **`deals` missing `contact_id` FK** — affects Deals/Opportunities, any feature linking deals to contacts.
+3. **`snippets`, `trigger_links` likely missing `business_id`** — affects Snippets, Trigger Links. Note: `automation_enrollments` business_id gap was resolved as part of Reputation Management build.4. **`deals` missing `contact_id` FK** — affects Deals/Opportunities, any feature linking deals to contacts.
 5. **Calendar grid filtering checkboxes are non-functional** — affects any feature relying on filtered calendar views.
 6. **Appointment editing is a known regression** — do not assume edit flow exists when building calendar-adjacent features.
 7. **Team/permissions data model unconfirmed** — affects any feature gating by role.

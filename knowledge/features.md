@@ -118,11 +118,11 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** Unclear — possibly column on `businesses`, possibly new table. Needs confirmation (see `database.md` open items).
 - **Issues:** UI for setting hours not yet wired to calendar display logic.
 
-### Public Booking Page
-- **Status:** Planned
-- **Description:** Public-facing `/book/:calendarId` page for customers to self-book appointments.
-- **Tables:** `appointments`, `calendars`
-- **Issues:** Not started.
+### Appointment Editing
+- **Status:** Built
+- **Description:** Full edit sheet opens when tapping any appointment on the calendar. Editable fields: name, type, status, start/end date+time (with date and time pickers), location, lead name/phone/email, notes, booking source, admin email, calendar assignment, and assigned team member. Save writes all fields back to the `appointments` table. Marking status as Completed fires the `appointment_completed` automation trigger (which drives the review request flow).
+- **Tables:** `appointments`
+- **Issues:** None known.
 
 ---
 

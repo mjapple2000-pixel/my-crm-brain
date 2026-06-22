@@ -21,7 +21,8 @@ If a business doesn't take appointments, doesn't get inbound calls/texts from cu
 
 - **Simple** — Every screen should be usable without training. This is why we rebuilt Calendar, Conversations, and Pipelines to match GHL's proven UX patterns rather than inventing new ones: familiar beats novel for a business owner with five minutes between jobs.
 - **Fast** — Setup-to-value should be measured in minutes, not days. The Launchpad (onboarding checklist) and beta paywall bypass exist so a new business can get the AI SMS flow and knowledge base live before they've finished exploring the rest of the app.
-- **Affordable** — Pricing (Starter $97/mo, Growth $297/mo, Pro $497/mo, 15-day trials) is set to be a no-brainer replacement for "a part-time answering service" or "a missed-call problem," not a line-item that needs CFO approval like HubSpot.
+- **Affordable** — Pricing (Starter $97/mo, Growth $297/mo, Pro $497/mo, all with a 15-day free trial on whichever plan the customer chooses) is set to be a no-brainer replacement for "a part-time answering service" or "a missed-call problem." Each tier unlocks progressively more features — Starter covers the core CRM and AI booking workflow; Growth and Pro unlock the full AI suite, advanced automations, and priority support. Customers have a clear reason to upgrade: the features that matter most are on higher tiers, not buried in fine print.
+
 - **AI Assisted** — AI isn't a chatbot widget tacked onto a contact form. It's wired into the actual workflow that drives revenue: the SMS booking state machine reads from the business's own knowledge base, books real appointments, and writes back into the same `conversations`/`messages`/`appointments` tables a human would use. AI usage is also tracked per business (`ai_usage_logs`) so cost stays predictable as this scales.
 
 ## Things We Avoid

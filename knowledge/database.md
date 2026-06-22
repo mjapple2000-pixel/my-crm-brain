@@ -35,7 +35,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 - **messages** — individual messages. `business_id` required. ⚠️ **RLS pending re-enable** — tracked exception in Business Rules.
 - **support_chats** — support conversations with staff. Scoped to business + superuser visibility.
 - **support_tickets** — support ticket records. Scoped to business + superuser visibility.
-- **snippets** — saved canned-reply text. Confirmed: app code writes business_id directly on insert for both snippets (snippets_screen.dart) and trigger_links (conversations_screen.dart, handle-trigger-link edge function) — the column exists and is populated. RLS policy correctness on these columns could not be verified (no migration files in repo); needs a direct Supabase dashboard check, not a code-only verification. (snippets are business-specific content). Needs migration + RLS, not a legitimate global exception. \business_id` confirmed present in app insert code. RLS policy status unverified (no migration files in repo) — check Supabase dashboard.`
+- **snippets** — saved canned-reply text. `business_id` confirmed present in insert code (`snippets_screen.dart`). RLS policy status unverified (no migration files in repo) — check Supabase dashboard.
 
 ---
 

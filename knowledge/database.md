@@ -20,7 +20,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 - **contacts** — a business's customers/contacts. `business_id` required.
 - **leads** — incoming leads. Uses `lead_name` / `lead_email` / `lead_phone` / `lead_status` naming (not generic columns). `business_id` required.
-- **deals** — sales pipeline deals. ⚠️ Currently lacks a proper `contact_id` FK (contact reference is hacked into a notes field) — flagged for fix in roadmap. `business_id` required.
+- **deals** — sales pipeline deals. deals now has a proper FK: lead_id, referencing leads (not contacts). The "New Opportunity" form picks from the leads table and inserts lead_id directly — no notes-field hack. Naming                 note: this FK points to leads, not contacts, despite the UI calling it "Contact." `business_id` required.
 - **pipelines** — pipeline definitions. `business_id` required.
 - **pipeline_stages** — stages within a pipeline. Scoped via `pipeline_id` → `pipelines.business_id`; verify FK join doesn't allow cross-business stage assignment.
 - **custom_values** — custom fields/values for contacts or deals. `business_id` required.
@@ -35,7 +35,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 - **messages** — individual messages. `business_id` required. ⚠️ **RLS pending re-enable** — tracked exception in Business Rules.
 - **support_chats** — support conversations with staff. Scoped to business + superuser visibility.
 - **support_tickets** — support ticket records. Scoped to business + superuser visibility.
-- **snippets** — saved canned-reply text. ⚠️ Marked "unrestricted" — should almost certainly have `business_id` (snippets are business-specific content). Needs migration + RLS, not a legitimate global exception.
+- **snippets** — saved canned-reply text. Confirmed: app code writes business_id directly on insert for both snippets (snippets_screen.dart) and trigger_links (conversations_screen.dart, handle-trigger-link edge function) — the column exists and is populated. RLS policy correctness on these columns could not be verified (no migration files in repo); needs a direct Supabase dashboard check, not a code-only verification. (snippets are business-specific content). Needs migration + RLS, not a legitimate global exception.
 
 ---
 
@@ -77,7 +77,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Misc
 
-- **trigger_links** — trackable links. ⚠️ Marked "unrestricted" — should have `business_id` (links are created per-business for campaigns). Needs migration + RLS.
+- **trigger_links** — trackable links. (links are created per-business for campaigns).
 - **trigger_link_clicks** — click tracking on trigger links. Scoped via `trigger_link_id` → business; same concern as above — if `trigger_links` lacks `business_id`, this table inherits the gap.
 
 ---
@@ -96,6 +96,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 When proposing schema changes, treat the following as **known debt, not acceptable patterns to replicate**:
 1. `conversation_views` — RLS disabled
 2. `messages` — RLS pending re-enable
-3. **`snippets`, `trigger_links` likely missing `business_id`** — affects Snippets, Trigger Links. Note: `automation_enrollments` business_id gap resolved as part of Reputation Management build.4. `deals` — missing proper `contact_id` FK
+3. **`snippets`, `trigger_links` likely missing `business_id`** — affects Snippets, Trigger Links. Note: `automation_enrollments` business_id gap resolved as part of Reputation Management build.
+4. `deals` — missing proper `contact_id` FK
 
 Do not copy these patterns into new tables. New tables must follow Business Rules in full from creation.

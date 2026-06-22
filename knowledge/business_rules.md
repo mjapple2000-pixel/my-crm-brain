@@ -59,3 +59,19 @@ These rules are non-negotiable. Any AI agent generating database changes, code, 
 
 - Customer data (a business's contacts, leads, conversations, etc.) must never be used to train models or shared across businesses.
 - AI agents accessing `knowledge_base` for a business must only access that business's own records.
+
+## Plan Gating
+
+Feature access is gated by plan tier. This is non-negotiable — without gating there is no reason for any customer to upgrade.
+
+- The three confirmed tiers are: **Starter ($97/mo)**, **Growth ($297/mo)**, **Pro ($497/mo)**.
+- All paid plans include a **15-day free trial** — the customer selects a plan at signup, gets 15 days free, then is charged that plan's rate automatically.
+- **Beta users are completely separate.** Beta testers are personally selected family and friends who have permanent free access in exchange for testing and feedback. They are not trials, not paying customers, and not part of the public product. Beta access is controlled via the `is_beta` flag and `beta_testers` table — never remove or modify this system when implementing plan gating.
+- The `businesses` table has a `plan` column (`starter` | `growth` | `pro`). All gating logic reads from this column.
+- **Starter** unlocks: SMS, unified inbox, pipeline, automations (limited), missed call text back, AI receptionist, review requests, contact timeline, appointment reminders.
+- **Growth** unlocks: full AI suite (sales coach, lead responder, appointment assistant, review responses), custom workflows, multiple pipelines, API access, advanced automations.
+- **Pro** unlocks: priority support, unlimited SMS, advanced analytics, white label (future), dedicated onboarding.
+- Every edge function that touches a gated feature MUST call `check_plan_feature(business_id, feature_name)` before executing. Plan checking is server-side first — the Flutter UI gating is a convenience, not the security layer.
+- When a customer hits a gated feature they don't have access to, they see an upgrade prompt, not an error.
+- Usage limits also apply by tier (contacts, SMS/month, automations, users). These are tracked in `business_usage` and reset monthly via cron.
+- We are not racing to the bottom on pricing. Never propose reducing tier prices or collapsing tiers without explicit instruction.

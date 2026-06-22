@@ -219,11 +219,13 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Description:** Long-term roadmap items, not yet started.
 - **Tables:** None yet.
 - **Issues:** N/A.
+  
 ### Reputation Management (Review Requests)
 - **Status:** Built
-- **Description:** The Automation Builder wiring is live — \appointment_completed` trigger and `send_review_request` action both exist in `automations_screen.dart`. However the Settings tab that lets a business enter their Google/Facebook review links and send delay (`_ReviewsSection` widget) is dead code — it is defined in `settings_screen.dart` but never added to the sidebar list or the section switch, so it is unreachable in the live app. Businesses currently cannot configure review links from the UI.`
+- **Description:** Full flow is live. (1) `reviews_screen.dart` (314 lines) is accessible via the main sidebar navigation under a Reviews entry (gated by `_can('settings')`). It reads and saves `google_review_link`, `facebook_review_link`, and `review_request_delay_minutes` on the `businesses` table. (2) Automation Builder wiring is live — `appointment_completed` trigger and `send_review_request` action both exist in `automations_screen.dart`. Note: a duplicate `_ReviewsSection` widget also exists inside `settings_screen.dart` (line 6357) but is dead code — never referenced in the settings sidebar or switch statement. The functional screen is the standalone `/reviews` route.
 - **Tables:** `businesses` (google_review_link, facebook_review_link, review_request_delay_minutes), `automations`, `automation_enrollments`, `automation_logs`
-- **Issues:** ⚠️ \_ReviewsSection` widget exists but is unreachable — it is not wired into the settings sidebar (which only goes to index 10) or the `_buildContent()` switch (which only handles cases 0–24). The `google_review_link`, `facebook_review_link`, and `review_request_delay_minutes` columns on `businesses` cannot be set by any user-facing screen.`
+- **Issues:** `_ReviewsSection` inside `settings_screen.dart` (line 6357) is dead code — never wired to a settings tab. Does not block the feature but is a cleanup item.
+  
 ### Missed Call Text Back
 - **Status:** Not Started
 - **Description:** Long-term roadmap item.

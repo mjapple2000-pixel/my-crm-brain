@@ -14,4 +14,4 @@ Email: Mailgun
 
 Payments: Stripe
 
-Hosting: Supabase
+Hosting: Firebase Hosting (web build) + Supabase (backend/data)

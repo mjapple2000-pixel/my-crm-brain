@@ -98,3 +98,4 @@ When proposing schema changes, treat the following as **known debt, not acceptab
 2. `messages` — RLS pending re-enable
 3. `snippets` and `trigger_links` — `business_id` column confirmed present in app code. RLS policy correctness still needs Supabase dashboard verification.
 4. `deals` — `contact_id` FK debt resolved; now uses `lead_id` FK referencing `leads` table.
+Do not copy these patterns into new tables. New tables must follow Business Rules in full from creation.

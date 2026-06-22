@@ -95,11 +95,11 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** None known.
 
 ### Appointment Editing
-- **Status:** Not Started (regression)
-- **Description:** Editing an existing appointment was removed during the calendar rebuild and has not been restored.
+- **Status:** Built
+- **Description:** Full edit sheet opens when tapping any appointment on the calendar. Editable fields: name, type, status, start/end date+time (with date and time pickers), location, lead name/phone/email, notes, booking source, admin email, calendar assignment, and assigned team member. Save writes all fields back to the `appointments` table. Marking status as Completed fires the `appointment_completed` automation trigger (which drives the review request flow).
 - **Tables:** `appointments`
-- **Issues:** ⚠️ Known regression — high priority restoration item.
-
+- **Issues:** None known.
+  
 ### Calendar Settings
 - **Status:** In Progress
 - **Description:** Settings with sub-tabs for Calendars, Groups, Service Menu, Rooms, Equipment. Equipment tab fully implemented.

@@ -21,8 +21,9 @@ These rules are non-negotiable. Any AI agent generating database changes, code, 
 
 ## IDs
 
-- All primary keys are UUIDs.
-- Never reuse or guess IDs — always generate via `gen_random_uuid()` or equivalent.
+- All primary keys are `bigint` (auto-incrementing) — not UUIDs.
+- Never reuse or guess IDs — always let the database generate them automatically via `bigint` serial/identity columns.
+- Do not use `gen_random_uuid()` for primary keys — this was a previous convention that no longer applies.
 
 ## Deletes
 

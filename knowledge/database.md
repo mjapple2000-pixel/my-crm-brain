@@ -20,7 +20,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 - **contacts** — a business's customers/contacts. `business_id` required.
 - **leads** — incoming leads. Uses `lead_name` / `lead_email` / `lead_phone` / `lead_status` naming (not generic columns). `business_id` required.
-- **deals** — sales pipeline deals. deals now has a proper FK: lead_id, referencing leads (not contacts). The "New Opportunity" form picks from the leads table and inserts lead_id directly — no notes-field hack. Naming                 note: this FK points to leads, not contacts, despite the UI calling it "Contact." `business_id` required. Uses \lead_id` FK referencing `leads` (UI labels this "Contact"). The old notes-field hack is resolved.`
+- **deals** — sales pipeline deals. Uses `lead_id` FK referencing `leads` (UI labels this field "Contact" — not a `contact_id`). `business_id` required.
 - **pipelines** — pipeline definitions. `business_id` required.
 - **pipeline_stages** — stages within a pipeline. Scoped via `pipeline_id` → `pipelines.business_id`; verify FK join doesn't allow cross-business stage assignment.
 - **custom_values** — custom fields/values for contacts or deals. `business_id` required.

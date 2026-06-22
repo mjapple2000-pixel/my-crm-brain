@@ -77,7 +77,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Misc
 
-- **trigger_links** — \business_id` confirmed present in app insert code and edge function. RLS policy status unverified (no migration files in repo) — check Supabase dashboard.`trackable links. (links are created per-business for campaigns).
+- **trigger_links** — trackable links created per-business for campaigns. `business_id` confirmed present in insert code (`conversations_screen.dart`, `handle-trigger-link` edge function). RLS policy status unverified (no migration files in repo) — check Supabase dashboard.
 - **trigger_link_clicks** — click tracking on trigger links. Scoped via `trigger_link_id` → business; same concern as above — if `trigger_links` lacks `business_id`, this table inherits the gap.
 
 ---

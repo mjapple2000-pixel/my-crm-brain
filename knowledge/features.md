@@ -204,7 +204,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Smart Lists
 - **Status:** Built
-- **Description:** Saved contact filter/segment presets. Full create/update/delete UI in \smart_lists_manager.dart` (455 lines), wired into the Contacts screen with filters JSON and `business_id` scoping.`
+- **Description:** Saved contact filter/segment presets. Full create/update/delete UI in `smart_lists_manager.dart` (455 lines), wired into the Contacts screen with filters JSON and `business_id` scoping.
 - **Tables:** `smart_lists`
 - **Issues:** None known.
 

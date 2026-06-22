@@ -221,7 +221,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** N/A.
 ### Reputation Management (Review Requests)
 - **Status:** Built
-- **Description:** Post-appointment review request via SMS. Businesses set their Google/Facebook review links and send delay in Settings (Reviews tab, index 25). Uses existing Automation Builder — appointment_completed trigger + send_review_request action. One-click template enables the flow per business.
+- **Description:** Post-appointment review request via SMS. The "Send Review Request" automation (trigger + action) works. The Settings UI for entering Google/Facebook review links and send delay (_ReviewsSection widget) is fully coded but not wired up — it's never referenced by the settings sidebar list or the section switch statement, so the tab does not exist in the live app. A business currently has no way to set google_review_link/facebook_review_link/review_request_delay_minutes from the UI. Uses existing Automation Builder — appointment_completed trigger + send_review_request action. One-click template enables the flow per business.
 - **Tables:** `businesses` (google_review_link, facebook_review_link, review_request_delay_minutes), `automations`, `automation_enrollments`, `automation_logs`
 - **Issues:** None known.
 ### Missed Call Text Back

@@ -212,7 +212,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Trackable links with click tracking.
 - **Tables:** `trigger_links`, `trigger_link_clicks`
-- **Issues:** \business_id` confirmed present on insert (conversations_screen.dart and handle-trigger-link edge function both write it). Full create/list/delete UI exists in the Conversations screen sidebar. RLS policy correctness still needs a Supabase dashboard check — no migration files in repo.`
+- **Issues:** `business_id` confirmed present on insert (`conversations_screen.dart` and `handle-trigger-link` edge function both write it). Full create/list/delete UI exists in the Conversations screen sidebar. RLS policy correctness still needs a Supabase dashboard check — no migration files in repo.
 
 ### Email Marketing / Social Planner / Websites/Funnels / Memberships
 - **Status:** Not Started

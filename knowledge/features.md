@@ -24,7 +24,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** In Progress
 - **Description:** Sales pipeline deals with color-coded preset tags, forecast value stat pill (`win_probability`), pipeline delete. Won/Lost stats partially implemented.
 - **Tables:** `deals`, `pipelines`, `pipeline_stages`, `custom_values`
-- **Issues:** ⚠️ `deals` lacks a proper `contact_id` FK (contact reference currently hacked via notes field). Won/Lost stats incomplete. This screen is complex — always paste current `pipelines_screen.dart` before proposing changes.
+- **Issues:**  `deals` now uses a proper `lead_id` FK referencing the `leads` table (not a notes-field hack). The UI labels this field "Contact" but the column is `lead_id`. Won/Lost stats incomplete.This screen is complex — always paste current `pipelines_screen.dart` before proposing changes.
 
 ### Pipelines / Pipeline Stages
 - **Status:** Built
@@ -61,10 +61,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** ⚠️ RLS currently disabled, no confirmed `business_id`/`user_id` scoping — tracked exception, needs fix before relying on this for multi-tenant safety.
 
 ### Snippets (Canned Replies)
-- **Status:** Built (UI + insertion logic), data model incomplete
+- **Status:** Built
 - **Description:** Saved quick-reply text, inserted via click into reply box.
 - **Tables:** `snippets`
-- **Issues:** ⚠️ Marked "unrestricted" — likely missing `business_id` and RLS. Functionally works but is a multi-tenancy gap.
+- **Issues:** \business_id` confirmed present — insert in `snippets_screen.dart` includes it. RLS policy correctness cannot be verified from code alone (no migrations folder); needs Supabase dashboard check.`
 
 ### Active Automations Sidebar
 - **Status:** Built
@@ -203,16 +203,16 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** Depth of implementation not confirmed — verify against current code before assuming feature-complete.
 
 ### Smart Lists
-- **Status:** Not Started
-- **Description:** Saved contact filters/segments — table exists in schema but no confirmed UI/logic.
+- **Status:** Built
+- **Description:** Saved contact filter/segment presets. Full create/update/delete UI in \smart_lists_manager.dart` (455 lines), wired into the Contacts screen with filters JSON and `business_id` scoping.`
 - **Tables:** `smart_lists`
-- **Issues:** Backend table only, if that — needs verification.
+- **Issues:** None known.
 
 ### Trigger Links (Link Tracking)
-- **Status:** Not Started / Built (backend only, unclear)
+- **Status:** Built
 - **Description:** Trackable links with click tracking.
 - **Tables:** `trigger_links`, `trigger_link_clicks`
-- **Issues:** ⚠️ Marked "unrestricted" — likely missing `business_id`. No confirmed UI. Needs verification of both implementation status and multi-tenancy.
+- **Issues:** \business_id` confirmed present on insert (conversations_screen.dart and handle-trigger-link edge function both write it). Full create/list/delete UI exists in the Conversations screen sidebar. RLS policy correctness still needs a Supabase dashboard check — no migration files in repo.`
 
 ### Email Marketing / Social Planner / Websites/Funnels / Memberships
 - **Status:** Not Started
@@ -221,9 +221,9 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** N/A.
 ### Reputation Management (Review Requests)
 - **Status:** Built
-- **Description:** Post-appointment review request via SMS. The "Send Review Request" automation (trigger + action) works. The Settings UI for entering Google/Facebook review links and send delay (_ReviewsSection widget) is fully coded but not wired up — it's never referenced by the settings sidebar list or the section switch statement, so the tab does not exist in the live app. A business currently has no way to set google_review_link/facebook_review_link/review_request_delay_minutes from the UI. Uses existing Automation Builder — appointment_completed trigger + send_review_request action. One-click template enables the flow per business.
+- **Description:** The Automation Builder wiring is live — \appointment_completed` trigger and `send_review_request` action both exist in `automations_screen.dart`. However the Settings tab that lets a business enter their Google/Facebook review links and send delay (`_ReviewsSection` widget) is dead code — it is defined in `settings_screen.dart` but never added to the sidebar list or the section switch, so it is unreachable in the live app. Businesses currently cannot configure review links from the UI.`
 - **Tables:** `businesses` (google_review_link, facebook_review_link, review_request_delay_minutes), `automations`, `automation_enrollments`, `automation_logs`
-- **Issues:** None known.
+- **Issues:** ⚠️ \_ReviewsSection` widget exists but is unreachable — it is not wired into the settings sidebar (which only goes to index 10) or the `_buildContent()` switch (which only handles cases 0–24). The `google_review_link`, `facebook_review_link`, and `review_request_delay_minutes` columns on `businesses` cannot be set by any user-facing screen.`
 ### Missed Call Text Back
 - **Status:** Not Started
 - **Description:** Long-term roadmap item.

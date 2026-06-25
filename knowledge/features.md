@@ -118,10 +118,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `businesses` (availability_hours JSON column, slot_duration_minutes). Also on `calendars` (per-calendar override).
 - **Issues:** None known.
 
-### Appointment Editing
+### Public Booking Page
 - **Status:** Built
-- **Description:** Full edit sheet opens when tapping any appointment on the calendar. Editable fields: name, type, status, start/end date+time (with date and time pickers), location, lead name/phone/email, notes, booking source, admin email, calendar assignment, and assigned team member. Save writes all fields back to the `appointments` table. Marking status as Completed fires the `appointment_completed` automation trigger (which drives the review request flow).
-- **Tables:** `appointments`
+- **Description:** Public-facing `/book/:calendarId` page — 3-step flow: (1) customer picks a date and available time slot, (2) enters name, email, phone, (3) sees confirmation screen. Routed unauthenticated in `app_router.dart`. Calls the `submit-booking` edge function (317 lines), which resolves `business_id` server-side from the calendar, writes the appointment and lead rows, then sends a Twilio confirmation SMS.
+- **Tables:** `appointments`, `calendars`, `leads`
 - **Issues:** None known.
 
 ---

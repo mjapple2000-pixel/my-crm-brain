@@ -184,8 +184,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built (data model concern)
 - **Description:** Tracks which contacts are enrolled in which automations; surfaced in conversation sidebar.
 - **Tables:** `automation_enrollments`
-- **Issues:** ⚠️ Marked "unrestricted" — likely lacks direct `business_id`, relies on joins through `automation_id`/`contact_id`. Potential cross-tenant leak vector per Business Rules FK-join guidance; needs review.
-
+- **Issues:** `business_id` IS written on insert in both `run-automation` (line ~320) and `handle-trigger-link` edge functions — the column exists. However `process-scheduled-automations` queries `automation_enrollments` without a `business_id` filter (it fetches all active rows due next, then processes them by automation). RLS policy correctness cannot be verified from code alone (no migration files in repo) — check Supabase dashboard to confirm RLS enforces tenant isolation on this table.
 ---
 
 ## Marketing

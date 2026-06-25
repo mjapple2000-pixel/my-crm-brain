@@ -113,10 +113,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** ⚠️ Checkboxes are visual-only — do not actually filter the displayed appointments yet.
 
 ### Business Hours
-- **Status:** Planned
-- **Description:** Business hours configuration intended to wire into `_visibleHourRange()` in `business_profile_screen.dart`.
-- **Tables:** Unclear — possibly column on `businesses`, possibly new table. Needs confirmation (see `database.md` open items).
-- **Issues:** UI for setting hours not yet wired to calendar display logic.
+- **Status:** Built
+- **Description:** Per-day availability editor (`_AvailabilityHoursEditor`) lives inside the Business Profile settings tab (Settings → Business Profile, under the "Business Hours" group). Saves as a JSON column `availability_hours` on the `businesses` table. The calendar screen (`appointments_screen.dart`) reads `availability_hours` and `slot_duration_minutes` from `businesses` at load time. The `get-available-slots` and `receive-sms` edge functions also read `availability_hours` from the `calendars` table for public booking slot generation.
+- **Tables:** `businesses` (availability_hours JSON column, slot_duration_minutes). Also on `calendars` (per-calendar override).
+- **Issues:** None known.
 
 ### Appointment Editing
 - **Status:** Built

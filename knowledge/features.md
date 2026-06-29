@@ -10,8 +10,8 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Contacts
 - **Status:** Built
-- **Description:** Standard contact records, linked to conversations, appointments, deals.
-- **Tables:** `contacts`
+- **Description:** Standard contact records, linked to conversations, appointments, deals. Supports multi-select bulk actions: **Bulk SMS** (calls `bulk-sms` edge function, sends Twilio SMS to selected leads with phones) and **Bulk Email** (calls `bulk-email` edge function, sends Mailgun email to selected leads with email addresses). Both functions skip leads missing the required field and return sent/skipped counts.
+- **Tables:** `contacts`, `leads`
 - **Issues:** None known.
 
 ### Leads

@@ -226,10 +226,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** `_ReviewsSection` inside `settings_screen.dart` (line 6357) is dead code — never wired to a settings tab. Does not block the feature but is a cleanup item.
   
 ### Missed Call Text Back
-- **Status:** Not Started
-- **Description:** Long-term roadmap item.
-- **Tables:** Likely `messages`, `automations`.
-- **Issues:** N/A.
+- **Status:** Built
+- **Description:** Two-function Twilio flow. `handle-inbound-call` receives the call via webhook, looks up the business by `ai_phone_number`, logs to `call_logs`, and dials the owner's real phone (`owner_phone`) for 20 seconds. `handle-call-status` fires on the Dial action callback — if the owner didn't answer (no-answer / busy / failed / canceled), it sends a missed-call SMS to the caller using the business's `missed_call_text_message` template, then logs the outbound SMS to `messages` and creates/updates the `conversations` record so it appears in the inbox.
+- **Tables:** `call_logs`, `conversations`, `messages`, `businesses` (reads `ai_phone_number`, `owner_phone`, `missed_call_text_message`, `business_name`)
+- **Issues:** `call_logs` table is not documented in `database.md` — needs to be added. Confirm RLS status and whether `reply_sent` deduplication is working correctly end-to-end.
 
 ---
 

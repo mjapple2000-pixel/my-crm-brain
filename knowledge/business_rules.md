@@ -68,7 +68,7 @@ Feature access is gated by plan tier. This is non-negotiable — without gating 
 - The three confirmed tiers are: **Starter ($97/mo)**, **Growth ($297/mo)**, **Pro ($497/mo)**.
 - All paid plans include a **15-day free trial** — the customer selects a plan at signup, gets 15 days free, then is charged that plan's rate automatically.
 - **Beta users are completely separate.** Beta testers are personally selected family and friends who have permanent free access in exchange for testing and feedback. They are not trials, not paying customers, and not part of the public product. Beta access is controlled via the `is_beta` flag and `beta_testers` table — never remove or modify this system when implementing plan gating.
-- The `businesses` table has a `plan` column (`starter` | `growth` | `pro`). All gating logic reads from this column.
+- The `businesses` table has a `subscription_status` column that holds the plan tier value (`starter` | `growth` | `pro` | `cancelled`). The Stripe webhook (`stripe-webhook` edge function) writes to this column on `customer.subscription.updated` and `customer.subscription.deleted`. All gating logic must read from `subscription_status`, not a `plan` column — no `plan` column exists.
 - **Starter** unlocks: SMS, unified inbox, pipeline, automations (limited), missed call text back, AI receptionist, review requests, contact timeline, appointment reminders.
 - **Growth** unlocks: full AI suite (sales coach, lead responder, appointment assistant, review responses), custom workflows, multiple pipelines, API access, advanced automations.
 - **Pro** unlocks: priority support, unlimited SMS, advanced analytics, white label (future), dedicated onboarding.

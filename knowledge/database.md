@@ -86,7 +86,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 - **Team Members / Permissions** — referenced in Settings UI. Confirm whether this is its own table (e.g. `team_members`, `permissions`, `roles`) or modeled via `profiles` + role column.
 - **Business Hours** — referenced in roadmap (`_visibleHourRange()` in calendar). Confirm whether this is a dedicated table, a JSON column on `businesses`, or part of `calendars`.
-- **Stripe / Subscription state** — confirm whether billing status, plan, `is_beta` flag, etc. live as columns on `businesses` or in a separate `subscriptions`/`stripe_customers` table.
+- **Stripe / Subscription state** — confirmed: billing columns live directly on `businesses`. Columns written by `stripe-webhook`: `is_paid` (bool), `client_id` (Stripe customer ID), `subscription_id`, `subscription_status` (`starter` | `growth` | `pro` | `cancelled`). No separate `subscriptions` or `stripe_customers` table exists.
 - **Webhook / inbound SMS logs** — useful for debugging Make scenarios and the SMS booking flow. Confirm whether this is covered by `automation_logs` / `ai_usage_logs` or needs its own table.
 
 ---

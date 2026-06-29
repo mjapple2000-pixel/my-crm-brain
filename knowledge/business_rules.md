@@ -72,7 +72,7 @@ Feature access is gated by plan tier. This is non-negotiable — without gating 
 - **Starter** unlocks: SMS, unified inbox, pipeline, automations (limited), missed call text back, AI receptionist, review requests, contact timeline, appointment reminders.
 - **Growth** unlocks: full AI suite (sales coach, lead responder, appointment assistant, review responses), custom workflows, multiple pipelines, API access, advanced automations.
 - **Pro** unlocks: priority support, unlimited SMS, advanced analytics, white label (future), dedicated onboarding.
-- Every edge function that touches a gated feature MUST call `check_plan_feature(business_id, feature_name)` before executing. Plan checking is server-side first — the Flutter UI gating is a convenience, not the security layer.
-- When a customer hits a gated feature they don't have access to, they see an upgrade prompt, not an error.
-- Usage limits also apply by tier (contacts, SMS/month, automations, users). These are tracked in `business_usage` and reset monthly via cron.
+- Every edge function that touches a gated feature MUST call `check_plan_feature(business_id, feature_name)` before executing. Plan checking is server-side first — the Flutter UI gating is a convenience, not the security layer. ⚠️ **NOT YET BUILT** — `check_plan_feature` does not exist in any edge function or database function as of this sync. This is the intended pattern, not current reality.
+- When a customer hits a gated feature they don't have access to, they see an upgrade prompt, not an error. ⚠️ **NOT YET BUILT** — no upgrade prompt UI exists in the Flutter app as of this sync.
+- Usage limits also apply by tier (contacts, SMS/month, automations, users). These are tracked in `business_usage` and reset monthly via cron. ⚠️ **NOT YET BUILT** — no `business_usage` table reference exists anywhere in the codebase as of this sync.
 - We are not racing to the bottom on pricing. Never propose reducing tier prices or collapsing tiers without explicit instruction.

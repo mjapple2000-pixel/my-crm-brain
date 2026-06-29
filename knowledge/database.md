@@ -79,7 +79,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 - **trigger_links** — trackable links created per-business for campaigns. `business_id` confirmed present in insert code (`conversations_screen.dart`, `handle-trigger-link` edge function). RLS policy status unverified (no migration files in repo) — check Supabase dashboard.
 - **trigger_link_clicks** — click tracking on trigger links. Scoped via `trigger_link_id` → business; same concern as above — if `trigger_links` lacks `business_id`, this table inherits the gap.
-
+- **call_logs** — records of inbound phone calls. Written by `handle-inbound-call` edge function. Columns confirmed from insert code: `business_id`, `contact_id` (nullable), `phone_number_from`, `phone_number_to`, `call_status` (default "answered", overwritten by status callback), `twilio_call_sid`, `reply_sent` (bool, deduplication flag). `handle-call-status` reads this table to decide whether to send missed-call SMS. `business_id` confirmed present. RLS policy status unverified (no migration files in repo) — check Supabase dashboard.
 ---
 
 ## Possibly Missing / Unclear — Needs Confirmation

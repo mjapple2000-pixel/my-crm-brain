@@ -248,7 +248,14 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** None known.
 
 ---
+## Reporting / Analytics
 
+### Reporting Dashboard
+- **Status:** Built
+- **Description:** Full reporting screen at `/reporting`. Shows stat cards for total contacts, total leads, open conversations, pipeline value, total deals, campaigns sent, total messages, and unread messages. Charts include: messages by day (line chart, last 7/30/90 days), deals by pipeline stage (donut chart), conversations by channel (donut chart), leads by status (donut chart), and recent campaign performance (table). Date range toggle: 7 / 30 / 90 days.
+- **Tables:** `contacts`, `leads`, `conversations`, `deals`, `pipeline_stages`, `messages`, `campaigns`, `campaign_contacts`
+- **Issues:** None known.
+  
 ## Billing / Subscriptions
 
 ### Stripe Checkout & Webhook

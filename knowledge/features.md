@@ -12,7 +12,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Standard contact records, linked to conversations, appointments, deals. Supports multi-select bulk actions: **Bulk SMS** (calls \bulk-sms` edge function, sends Twilio SMS to selected leads with phones) and Bulk Email (calls `bulk-email` edge function, sends Mailgun email to selected leads with email addresses). Both functions skip leads missing the required field and return sent/skipped counts.`
 - **Tables:** `contacts`, `leads`
-- **Issues:** None known.
+- **Issues:** \bulk-sms` (unlike `receive-sms`/`receive-email`) uses a plain `.maybeSingle()` with no `.order().limit(1)` guard when finding an existing conversation, and never backfills `contact_name`/`contact_phone` on the conversation row — neither on creation nor when reusing an existing one. Confirmed in the live `bulk-sms/index.ts`.`
 
 ### Leads
 - **Status:** Built

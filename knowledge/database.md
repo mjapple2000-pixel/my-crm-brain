@@ -8,7 +8,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Core / Multi-Tenant
 
-- **businesses** — each customer account using the CRM. The root tenant record; every business-scoped table should ultimately resolve to a row here via business_id. Also confirmed present: default_tax_rate (used when creating a new quote/invoice), stripe_connect_id, stripe_connect_ready, stripe_connect_onboarded (Stripe Connect status, used by Invoicing to gate payment collection)."
+- **businesses** — each customer account using the CRM. The root tenant record; every business-scoped table should ultimately resolve to a row here via business_id. Also confirmed present: default_tax_rate (used when creating a new quote/invoice), stripe_connect_id, stripe_connect_ready, stripe_connect_onboarded (Stripe Connect status, used by Invoicing to gate payment collection).
 - **profiles** — user profiles, linked to businesses. This is the source of truth for a user's `business_id` association (join here for tenant checks, not `users`).
 - **users** — Supabase auth records. Do not assume `business_id` lives here — always resolve via `profiles`.
 - **superusers** — staff admin accounts (elevated access per Business Rules RLS section).
@@ -19,7 +19,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 ## CRM Core
 
 - **contacts** — a business's customers/contacts. `business_id` required.
-- **leads** — incoming leads. Uses `lead_name` / `lead_email` / `lead_phone` / `lead_status` naming (not generic columns). `business_id` required.
+- **leads** — incoming leads. Uses lead_name / lead_email / lead_phone / lead_status naming (not generic columns). business_id required. Also confirmed present: lead_address (used across contacts_screen.dart and contact_detail_screen.dart, pre-dates this sync) and client_access_token (random per-lead token powering the /client/:token portal route — generated on first quote/invoice send if the lead doesn't already have one).
 - **deals** — sales pipeline deals. Uses `lead_id` FK referencing `leads` (UI labels this field "Contact" — not a `contact_id`). `business_id` required.
 - **pipelines** — pipeline definitions. `business_id` required.
 - **pipeline_stages** — stages within a pipeline. Scoped via `pipeline_id` → `pipelines.business_id`; verify FK join doesn't allow cross-business stage assignment.

@@ -255,6 +255,12 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Description:** Full reporting screen at `/reporting`. Shows stat cards for total contacts, total leads, open conversations, pipeline value, total deals, campaigns sent, total messages, and unread messages. Charts include: messages by day (line chart, last 7/30/90 days), deals by pipeline stage (donut chart), conversations by channel (donut chart), leads by status (donut chart), and recent campaign performance (table). Date range toggle: 7 / 30 / 90 days.
 - **Tables:** `contacts`, `leads`, `conversations`, `deals`, `pipeline_stages`, `messages`, `campaigns`, `campaign_contacts`
 - **Issues:** None known.
+
+### Job Costing
+- **Status:** Built
+- **Description:** Tracks expenses (labor/material/subcontractor/other) logged against a job (an appointment or a deal) via `log-job-expense`, computes profit margin via `compute-job-cost-snapshot`, and surfaces a report via `get-job-costing-report`. Gated to the **Growth** plan and above via a `check_plan_feature` Postgres RPC (feature key `job_costing`); server returns `{error: "upgrade_required"}` on 403, and both `reporting_screen.dart` and `pipelines_screen.dart` show an in-app upgrade prompt when blocked.
+- **Tables:** `job_expenses`, `job_revenue_snapshots`, `appointments`, `deals`, `invoices`
+- **Issues:** None known from code alone — see Open Questions re: the `invoices` table itself.
   
 ## Billing / Subscriptions
 

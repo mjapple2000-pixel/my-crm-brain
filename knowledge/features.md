@@ -261,6 +261,44 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Description:** Tracks expenses (labor/material/subcontractor/other) logged against a job (an appointment or a deal) via `log-job-expense`, computes profit margin via `compute-job-cost-snapshot`, and surfaces a report via `get-job-costing-report`. Gated to the **Growth** plan and above via a `check_plan_feature` Postgres RPC (feature key `job_costing`); server returns `{error: "upgrade_required"}` on 403, and both `reporting_screen.dart` and `pipelines_screen.dart` show an in-app upgrade prompt when blocked.
 - **Tables:** `job_expenses`, `job_revenue_snapshots`, `appointments`, `deals`, `invoices`
 - **Issues:** None known from code alone — see Open Questions re: the `invoices` table itself.
+
+## Jobs / Quotes / Invoicing
+
+  ### Jobs Hub
+  - **Status:** In Progress
+  - **Description:** `/jobs` screen, 5-tab hub: Quotes, Invoices, Service Requests are live and working. "Job forms" and "Time & expenses" tabs are explicitly UI-labeled **"Coming Soon"** — not built, just placeholders.
+  - **Tables:** N/A (container screen only)
+  - **Issues:** None known for the built tabs.
+
+  ### Quotes
+  - **Status:** Built
+  - **Description:** Create/edit quotes with line items pulled from Service Library or typed manually, sequential `Q-###` numbering, tax calculation. Send via SMS or email (AI-drafted message via `send-quote` edge function, using GPT-4o-mini) with a link to the client portal. Client can approve or decline from the portal. Approved quotes can be one-click converted to an invoice, copying over all line items.
+  - **Tables:** `quotes`, `line_items`, `leads`, `service_library`
+  - **Issues:** Not plan-gated — available on all tiers, unlike Job Costing.
+
+  ### Invoices & Payments
+  - **Status:** Built
+  - **Description:** Create/edit invoices (standalone or converted from a quote), sequential `INV-###` numbering. Send via SMS or email (AI-drafted, `send-invoice` edge function). Client pays via a Stripe-hosted payment page; `stripe-connect-webhook` marks the invoice `paid` automatically on `payment_intent.succeeded`. Requires the business to have completed Stripe Connect onboarding (`stripe_connect_ready` on `businesses`) or payment collection is blocked.
+  - **Tables:** `invoices`, `line_items`, `payment_links`, `leads`
+  - **Issues:** None known from code alone.
+
+  ### Client Portal
+  - **Status:** Built
+  - **Description:** Public, token-based page at `/client/:token` (no login) where a customer can view and approve/decline quotes, view and pay invoices, and submit a new service request. Token is stored on the `leads` row (`client_access_token`), generated the first time a quote or invoice is sent to that lead. Backed by `get-client-portal-data` (read) and `client-portal-action` (approve_quote / decline_quote / submit_service_request) edge functions.
+  - **Tables:** `leads`, `quotes`, `invoices`, `line_items`, `client_service_requests`, `appointments`
+  - **Issues:** None known from code alone.
+
+  ### Service Library
+  - **Status:** Built
+  - **Description:** Settings → Service Library tab (`_ServiceLibrarySection`, `settings_screen.dart` ~line 6816) for managing a business's preset services and default prices, used to prefill quote/invoice line items.
+  - **Tables:** `service_library`
+  - **Issues:** None known.
+
+  ### Client Service Requests
+  - **Status:** Built
+  - **Description:** Customers can submit a service request through the client portal; staff review/manage it from the Jobs → Service Requests tab (status: new/reviewed/scheduled/declined, plus internal notes).
+  - **Tables:** `client_service_requests`, `leads`
+  - **Issues:** None known.
   
 ## Billing / Subscriptions
 

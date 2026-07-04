@@ -8,7 +8,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Core / Multi-Tenant
 
-- **businesses** — each customer account using the CRM. The root tenant record; every business-scoped table should ultimately resolve to a row here via `business_id`.
+- **businesses** — each customer account using the CRM. The root tenant record; every business-scoped table should ultimately resolve to a row here via business_id. Also confirmed present: default_tax_rate (used when creating a new quote/invoice), stripe_connect_id, stripe_connect_ready, stripe_connect_onboarded (Stripe Connect status, used by Invoicing to gate payment collection)."
 - **profiles** — user profiles, linked to businesses. This is the source of truth for a user's `business_id` association (join here for tenant checks, not `users`).
 - **users** — Supabase auth records. Do not assume `business_id` lives here — always resolve via `profiles`.
 - **superusers** — staff admin accounts (elevated access per Business Rules RLS section).

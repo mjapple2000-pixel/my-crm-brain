@@ -10,8 +10,10 @@ Automation (fallback only): Make — use only when Supabase cannot handle the ta
 
 SMS: Twilio
 
-Email: Mailgun\n\nAI / LLM: OpenAI (gpt-4o-mini) — used by ai-chat, receive-sms, receive-email, and nexaflow-support edge functions
+Email: Mailgun
 
+AI / LLM: OpenAI (gpt-4o-mini) — used by ai-chat, receive-sms, receive-email, nexaflow-support, send-invoice, send-quote, and generate-weekly-insight edge functions
+  
 Payments: Stripe
 
 Hosting: Firebase Hosting (web build) + Supabase (backend/data)

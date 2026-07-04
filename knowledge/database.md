@@ -65,6 +65,13 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ---
 
+## Job Costing 
+
+- **job_expenses** — cost entries logged against a job (an appointment or a deal). `business_id` required. Confirmed columns from insert code (`log-job-expense` edge function): `business_id`, `appointment_id` (nullable), `deal_id` (nullable), `expense_type` (labor|material|subcontractor|other), `amount_cents`, `description`, `logged_by_profile_id`, `logged_at`, `deleted_at` (referenced by `compute-job-cost-snapshot` as a soft-delete filter). Gated behind Growth plan via `check_plan_feature` RPC (`job_costing` feature).
+- **job_revenue_snapshots** — computed profit/loss snapshot per job (appointment or deal), upserted by the `compute-job-cost-snapshot` edge function on conflict of `appointment_id` or `deal_id`. Confirmed columns: `business_id`, `appointment_id`, `deal_id`, `total_expenses_cents`, `total_revenue_cents`, `gross_profit_cents`, `profit_margin_pct`, `job_type`, `snapshotted_at`. Revenue side is pulled from the `invoices` table (see Open Questions — `invoices` itself is not yet documented here).
+
+---
+
 ## Marketing
 
 - **campaigns** — marketing campaigns. `business_id` required.

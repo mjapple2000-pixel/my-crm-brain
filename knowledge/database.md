@@ -93,6 +93,21 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ---
 
+## Employee Hub / Field Ops
+
+- **employee_hub_tokens** — token-based auth for the public, unauthenticated Employee Hub (`/hub/:token`, same pattern as the Client Portal's `client_access_token`). Confirmed columns: `token`, `profile_id`, `business_id`, `revoked_at` (set on revoke/reissue via `resend-employee-hub-link`).
+- **job_forms** — form templates (checklists, inspection forms, etc.) built by staff via the "Job forms" tab in the Jobs Hub. `business_id` required. Confirmed columns: `business_id`, `name`, `form_type`, `fields` (jsonb — array of `{id, type, label, required}`, plus `options` for select fields), `requires_signature`, `deleted_at`.
+- **job_form_submissions** — an instance of a job form attached to a specific appointment, filled out by a crew member through the Employee Hub. `business_id` required. Confirmed columns: `business_id`, `job_form_id`, `appointment_id`, `status` (not_started|in_progress, at minimum), `answers` (jsonb), `photo_urls`, `completed_by_profile_id`, `deleted_at`.
+- **job_types** — a business's job categories, managed from the "Service Menu" area of Calendar Settings. `business_id` required. Confirmed columns: `business_id`, `name`, `is_active`, `deleted_at`.
+- **phone_numbers** — Twilio numbers provisioned per business via `provision-phone-number`. `business_id` required. Confirmed columns: `business_id`, `twilio_sid`, `phone_number`, `friendly_name`, `deleted_at`.
+- **routes** — a day's optimized stop order for a crew member, computed by `optimize-route`. `business_id` required. Confirmed columns: `business_id`, `assigned_user_id`, `route_date`, `stops` (jsonb — ordered `{appointment_id, sequence, lat, lng}` array), `optimized_at`.
+- **team_locations** — live GPS position per crew member, upserted by `update-team-location` (called from the Employee Hub) and read by `routes_screen.dart` to plot crew on the map. Confirmed columns: `user_id`, `business_id`, `latitude`, `longitude`.
+- **time_entries** — clock-in/clock-out records. `business_id` required. Confirmed columns: `business_id`, `appointment_id` (nullable), `user_id`, `clocked_in_at`, `clock_in_lat`, `clock_in_lng`, `status` (active, at minimum), `deleted_at`. Written by `clock-in-out`; also read directly by `main_layout.dart` and `appointments_screen.dart` to show an active-clock indicator app-wide.
+- **service_menu_items** — services offered for booking (distinct from `service_library`, which feeds quote/invoice line items — see Open Questions). `business_id` required. Confirmed columns: `business_id`, `name`, `description`, `duration_minutes`, `price`, `calendar_ids`, `is_active`, `updated_at`. Full CRUD lives in the "Service Menu" tab of the Calendar Settings dialog inside `appointments_screen.dart` — not in `settings_screen.dart`.
+- **stripe_connect_accounts** — a second Stripe Connect record, separate from the `stripe_connect_id`/`stripe_connect_ready`/`stripe_connect_onboarded` columns already documented on `businesses` above (both systems are intentionally in use, per Mike — the split rationale isn't visible from code). Confirmed columns: `business_id`, `stripe_account_id`, `onboarding_complete`, `charges_enabled`, `payouts_enabled`, `deleted_at`. Written by `stripe-connect-onboard`/`stripe-connect-webhook`; read by `generate-payment-link`. ⚠️ No file under `lib/` calls any of these three or reads this table — as of this sync it's backend-only, with no confirmed UI entry point.
+
+---
+
 ## Misc
 
 - **trigger_links** — trackable links created per-business for campaigns. `business_id` confirmed present in insert code (`conversations_screen.dart`, `handle-trigger-link` edge function). RLS policy status unverified (no migration files in repo) — check Supabase dashboard.

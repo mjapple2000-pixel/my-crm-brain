@@ -116,4 +116,5 @@ When proposing schema changes, treat the following as **known debt, not acceptab
 2. `messages` — RLS pending re-enable
 3. `snippets` and `trigger_links` — `business_id` column confirmed present in app code. RLS policy correctness still needs Supabase dashboard verification.
 4. `deals` — `contact_id` FK debt resolved; now uses `lead_id` FK referencing `leads` table.
+5. `employee_hub_tokens`, `job_forms`, `job_form_submissions`, `job_types`, `phone_numbers`, `routes`, `team_locations`, `time_entries`, `service_menu_items`, `stripe_connect_accounts` — RLS status unverified, same as `snippets`/`trigger_links`/`call_logs` above (no migration files in repo). Check Supabase dashboard before treating any of these as a template for new tables.
 Do not copy these patterns into new tables. New tables must follow Business Rules in full from creation.

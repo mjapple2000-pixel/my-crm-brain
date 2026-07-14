@@ -299,6 +299,45 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
   - **Description:** Customers can submit a service request through the client portal; staff review/manage it from the Jobs → Service Requests tab (status: new/reviewed/scheduled/declined, plus internal notes).
   - **Tables:** `client_service_requests`, `leads`
   - **Issues:** None known.
+
+## Employee Hub / Field Ops
+
+### Employee Hub
+- **Status:** Built
+- **Description:** Public, token-based page at `/hub/:token` (unauthenticated — same pattern as the Client Portal) where a crew member clocks in/out, views assigned jobs, sees their optimized route, and fills out job forms. Token issued/revoked via `resend-employee-hub-link` and looked up by `get-employee-hub-data`.
+- **Tables:** `employee_hub_tokens`, `time_entries`, `routes`, `job_forms`, `job_form_submissions`
+- **Issues:** None known from code alone.
+
+### Time Tracking (Clock In/Out)
+- **Status:** Built
+- **Description:** Crew clock in/out from the Employee Hub or from an "active clock" indicator surfaced app-wide (`main_layout.dart`) and on individual appointments (`appointments_screen.dart`). Backed by `clock-in-out`, `get-timesheets` (feeds `/timesheets`, `timesheets_screen.dart`), `force-clock-out`, and `notify-stale-timesheet`. Gated behind plan via `check_plan_feature` (feature key `time_tracking`). Not surfaced inside the Jobs Hub's own "Time & expenses" tab, which is still a "Coming Soon" placeholder there.
+- **Tables:** `time_entries`
+- **Issues:** None known from code alone.
+
+### Job Forms
+- **Status:** Built
+- **Description:** Staff build form templates (checklists, inspection forms, with optional signature requirement) via the "Job forms" tab in the Jobs Hub. Forms are attached to an appointment, then filled out by a crew member through the Employee Hub (`/hub/:token/job-form/:submissionId`) and viewable after completion (`/hub/:token/job-form/:submissionId/view`). `generate-job-form-pdf` and `get-checklists-report` also read submissions.
+- **Tables:** `job_forms`, `job_form_submissions`, `appointments`
+- **Issues:** None known from code alone.
+
+### Route Optimization
+- **Status:** Built
+- **Description:** `/routes` screen (`routes_screen.dart`) computes and displays an optimized stop order per crew member per day via the `optimize-route` edge function, and plots live crew position via `team_locations` (written by `update-team-location`, called from the Employee Hub). Gated behind plan via `check_plan_feature` (feature keys `route_optimization` and `gps_tracking`).
+- **Tables:** `routes`, `team_locations`, `appointments`
+- **Issues:** None known from code alone.
+
+### Phone Number Provisioning
+- **Status:** Built
+- **Description:** Business can provision a Twilio number from Settings via the `provision-phone-number` edge function.
+- **Tables:** `phone_numbers`
+- **Issues:** None known from code alone.
+
+### Stripe Connect (Job Payments) — secondary system
+- **Status:** ⚠️ Backend only, no confirmed UI
+- **Description:** A second Stripe Connect onboarding path (`stripe-connect-onboard`, part of `stripe-connect-webhook`) that writes to the `stripe_connect_accounts` table, read by `generate-payment-link`. This is separate from the Invoicing Stripe Connect flow already documented under Invoices & Payments, which uses the `stripe_connect_id`/`stripe_connect_ready`/`stripe_connect_onboarded` columns on `businesses` directly. Both are intentionally in use for different reasons — the specific reason isn't inferable from code. No file in `lib/` calls any of the three functions above or reads this table.
+- **Tables:** `stripe_connect_accounts`
+- **Issues:** No UI entry point found — confirm whether this is mid-build, planned for a different surface (e.g. job payment collection separate from invoices), or dead code.
+
   
 ## Billing / Subscriptions
 

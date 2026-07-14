@@ -101,10 +101,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Issues:** None known.
   
 ### Calendar Settings
-- **Status:** In Progress
-- **Description:** Settings with sub-tabs for Calendars, Groups, Service Menu, Rooms, Equipment. Equipment tab fully implemented.
-- **Tables:** `calendars`, `calendar_groups`, `calendar_rooms`, `calendar_equipment`
-- **Issues:** Service Menu and other sub-tabs not confirmed complete beyond Equipment.
+- **Status:** Built
+- **Description:** Settings dialog (built inside `appointments_screen.dart`, not `settings_screen.dart`) with 5 sub-tabs: Calendars, Groups, Service Menu, Rooms, Equipment. All 5 now have full CRUD confirmed in code.
+- **Tables:** `calendars`, `calendar_groups`, `calendar_rooms`, `calendar_equipment`, `service_menu_items`
+- **Issues:** None known.
 
 ### Calendar Grid Filtering (Users/Calendars/Groups)
 - **Status:** In Progress (UI only, no backend logic)

@@ -80,6 +80,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
   - **service_library** — a business's preset services/prices, managed from Settings → Service Library, used to prefill quote/invoice line items. `business_id` required. Confirmed columns: `business_id`, `name`, `description`, `default_price`, `unit`, `is_active`, `updated_at`, `deleted_at`.
   - **payment_links** — Stripe payment tracking, one per invoice (also used independently of invoices by the pre-existing `generate-payment-link` function). `business_id` required. Confirmed columns: `business_id`, `invoice_id`, `stripe_payment_intent_id`, `stripe_payment_link_url`, `amount_cents`, `currency`, `status` (pending|paid), `paid_at`, `deleted_at`.
   - **client_service_requests** — service requests submitted by a customer through the client portal. `business_id` required, uses a normal `bigint` id (follows the IDs rule, unlike quotes/invoices above). Confirmed columns: `business_id`, `lead_id`, `description`, `preferred_date`, `status` (new|reviewed|scheduled|declined), `internal_notes`, `created_at`, `deleted_at`.
+  - **appointment_contact_info** — NOT a table, this is a database VIEW. Resolves an appointment's current contact info (live lead data if the lead still exists, otherwise falls back to the frozen snapshot on the appointment row) into appointment_id, resolved_name, resolved_phone, resolved_email. Read by appointments_screen.dart, employee-hub-action, and send-on-my-way-sms so all three don't duplicate the same live-vs-frozen fallback logic.
 
 ---
 

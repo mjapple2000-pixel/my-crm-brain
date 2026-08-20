@@ -238,7 +238,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Support Ticket System
 - **Status:** Built
-- **Description:** Superuser ticket viewer, Make-powered daily AI digest, AI fix suggestions written back via PATCH.
+- **Description:** Superuser ticket viewer, daily AI digest (migrated off Make to the daily-ticket-digestSupabase edge function — 2 realgpt-4o-minicalls per run, logs a heartbeat row tocron_run_logon every run, watched weekly bycron-heartbeat), AI fix suggestions written back via PATCH.
 - **Tables:** `support_tickets`
 - **Issues:** None known.
 

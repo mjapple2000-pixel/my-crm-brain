@@ -108,6 +108,16 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ---
 
+## AI Form Recreation & Template Library
+
+- **job_form_ai_drafts** — an in-progress AI form recreation session (photo/PDF upload → OCR → GPT → confirmed job form). `business_id` required. Confirmed columns: `business_id`, `status` ('processing'|'confirmed', at minimum), `created_by_profile_id`, `is_blank_template`, `source_file_url`, `source_page_urls`, `confirmed_job_form_id` (FK → `job_forms`, set on confirm), `updated_at`. Source files live in the `job-form-ai-sources` Storage bucket.
+- **form_templates** — a shared library entry publishing one business's `job_forms` row for reuse (optionally across businesses). `business_id` required (owning business). Confirmed columns: `business_id`, `title`, `description`, `source_job_form_id` (FK → `job_forms`), `min_tier` (present for a possible future per-template plan gate — confirmed by code comment as not currently used by any gate), `deleted_at`. RLS gives authenticated users read-only access; all writes go through the `job-form-editor` edge function.
+- **form_template_tags** — join table linking a `form_templates` row to one or more `form_tags`. Confirmed columns: `form_template_id`, `tag_id`.
+- **form_tags** — the pool of tags available for labeling templates in the library. Confirmed columns: `id`, `name`, `deleted_at`.
+- **job_form_photo_attachments** — GPS/location-tagged photos attached to a marker placed during AI Form Recreation (distinct from the `photo_urls` field-answer array on `job_form_submissions`, which is unrelated). Confirmed columns: `submission_id` (FK → `job_form_submissions`), `marker_id`, `storage_path`, `latitude`, `longitude`, `captured_at`, `created_at`, `deleted_at`.
+
+---
+
 ## Misc
 
 - **trigger_links** — trackable links created per-business for campaigns. `business_id` confirmed present in insert code (`conversations_screen.dart`, `handle-trigger-link` edge function). RLS policy status unverified (no migration files in repo) — check Supabase dashboard.

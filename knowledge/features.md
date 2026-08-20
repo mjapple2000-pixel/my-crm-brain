@@ -390,7 +390,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Beta Tester Management
 - **Status:** Built
-- **Description:** Full CRUD by status, resend-invite regenerates token and re-fires webhook, invite email via Make/Gmail. Full funnel confirmed working.
+- **Description:** Full CRUD by status, resend-invite regenerates token and re-fires webhook, invite email via the beta-tester-inviteSupabase edge function (Mailgun, migrated off Make/Gmail). A separatebeta-daily-email edge function (also migrated from Make, Mailgun-only, no AI) sends a recurring daily check-in email to active beta testers. Full funnel confirmed working.
 - **Tables:** `beta_testers`, `businesses`
 - **Issues:** None known.
 

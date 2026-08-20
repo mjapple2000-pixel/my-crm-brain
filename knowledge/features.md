@@ -321,6 +321,18 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `job_forms`, `job_form_submissions`, `appointments`
 - **Issues:** None known from code alone.
 
+### AI Form Recreation
+- **Status:** Built
+- **Description:** `/settings/ai-form-recreation` screen. Staff upload a photo or PDF of an existing paper form; `extract-job-form-ai` OCRs it via AWS Textract, then uses `gpt-4o-mini` to structure the result into fields (or, for forms with heavy visual layout, a "visual recreation" mode that keeps the original page as a background image with placed field markers). Staff review/edit in the app, then `confirm-job-form-recreation` finalizes it into a normal `job_forms` row. Gated client-side only (checks `businesses.plan` directly for growth/pro/beta, shows a locked dialog otherwise) — there is no server-side `check_plan_feature` call in `extract-job-form-ai` or `confirm-job-form-recreation`.
+- **Tables:** `job_form_ai_drafts`, `job_forms`, `job_form_photo_attachments`
+- **Issues:** No server-side plan enforcement — a business could call the edge functions directly and bypass the client-side gate. See Open Questions.
+
+### Template Library
+- **Status:** Built
+- **Description:** Businesses can optionally publish an AI-recreated blank template to a shared library for reuse by other businesses (`_shareWithOtherBusinesses` toggle in AI Form Recreation), tag it, and browse/copy others' shared templates from the Job Forms screen. All writes go through the `job-form-editor` edge function; RLS gives authenticated users read-only direct access to `form_templates`/`form_template_tags`. "Use template" is gated to Growth/Pro client-side (`job_forms_screen.dart`); publishing has no separate gate.
+- **Tables:** `form_templates`, `form_template_tags`, `form_tags`, `job_forms`
+- **Issues:** `form_templates.min_tier` column exists but is confirmed unused by any gate — flagged by its own code comment as scaffolding for a possible future per-template gate.
+
 ### Route Optimization
 - **Status:** Built
 - **Description:** `/routes` screen (`routes_screen.dart`) computes and displays an optimized stop order per crew member per day via the `optimize-route` edge function, and plots live crew position via `team_locations` (written by `update-team-location`, called from the Employee Hub). Gated behind plan via `check_plan_feature` (feature keys `route_optimization` and `gps_tracking`).

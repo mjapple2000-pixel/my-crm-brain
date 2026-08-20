@@ -12,7 +12,7 @@ SMS: Twilio
 
 Email: Mailgun
 
-AI / LLM: OpenAI (gpt-4o-mini) — used by ai-chat, receive-sms, receive-email, nexaflow-support, send-invoice, send-quote, and generate-weekly-insight edge functions
+AI / LLM: OpenAI (gpt-4o-mini) — used by ai-chat, receive-sms, receive-email, nexaflow-support, send-invoice, send-quote, generate-weekly-insight, daily-ticket-digest, and extract-job-form-ai edge functions
   
 Payments: Stripe
 

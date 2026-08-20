@@ -368,7 +368,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Welcome / Weekly Check-in Emails
 - **Status:** Built
-- **Description:** Make scenarios for welcome email (on checkout) and weekly check-in email, active in production.
+- **Description:** Migrated off Make to native Supabase edge functions (welcome-email, weekly-check-in) — both send via Mailgun directly, triggered on checkout / by cron respectively. Comments in both files confirm they're exact copies of the retired Make scenario blueprints.
 - **Tables:** `businesses`
 - **Issues:** None known.
 

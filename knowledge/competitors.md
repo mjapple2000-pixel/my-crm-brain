@@ -57,6 +57,57 @@ This file helps AI agents understand our competitive positioning so they don't s
 
 ---
 
+## ServiceTitan
+
+### Overview
+- Field service management platform built for large HVAC, plumbing, and electrical operations — ServiceTitan itself states the platform "is not optimized for companies with 3 or fewer technicians," and is priced/positioned for 20+ technician operations.
+- Per-technician pricing, roughly $245–$500/tech/month across three tiers (Starter, Essentials, Works), plus $5,000–$50,000+ implementation fees and a mandatory 12-month contract (some users report being pushed to 24–36 months). Pricing isn't published — quotes only come through a sales demo.
+
+### Strengths
+- Extremely deep feature set: dispatch board, marketing attribution tied directly to ad spend, technician performance leaderboards, and a new "Atlas" AI layer (announced September 2025) that runs reports, dispatches jobs, and adjusts marketing spend from plain-English commands.
+- Genuinely built for scale — companies growing from 5 to 15+ trucks don't outgrow it the way they outgrow simpler tools.
+- Strong review ratings (4.3–4.5/5 across G2 and Capterra) among larger operations that use most of the feature set.
+
+### Weaknesses / Complaints
+- **Enterprise pricing for non-enterprise needs.** Per-technician billing scales directly with headcount — a 10-tech company can pay $2,000–$4,000+/month before add-ons, with total first-year cost (subscription + implementation) commonly running $35,000–$65,000+.
+- **Add-ons stack on top of the base price.** Marketing Pro, Phones Pro, and Pricebook Pro are all billed separately; reviewers cite this repeatedly as a top frustration, with bills jumping 40–60% beyond the base subscription.
+- **Brutal onboarding.** Formal implementation takes 6–12 months for many customers; BBB complaints describe paying for a full year without ever being fully onboarded.
+- **Long contract lock-in.** 12-month minimum (sometimes 24–36 months), with documented termination fees of $5,000–$46,000+ and reports of verbal exit promises not matching the actual contract.
+- No built-in AI call-answering or missed-call lead capture — ServiceTitan manages jobs that are already booked, not leads before they book.
+
+### What We Do Differently
+- Transparent, published pricing per business, not per technician — a 10-person crew doesn't pay 10x what a solo operator pays.
+- No implementation fee, no sales-demo-gated pricing, no multi-month onboarding — the Launchpad checklist is the entire setup process.
+- AI front-desk (missed-call text-back, SMS booking) is core to the product from day one — not a gap the customer has to solve by bolting on a separate answering service, which is a documented weak spot even in ServiceTitan's enterprise feature set.
+- No long-term contract lock-in.
+
+---
+
+## Housecall Pro
+
+### Overview
+- Field service platform for home service trades (HVAC, plumbing, electrical, cleaning), positioned as the mid-market option between simple scheduling tools and ServiceTitan's enterprise complexity.
+- Three tiers: Basic ($59/mo annual, $79/mo monthly — 1 user), Essentials ($149/mo annual, $189/mo monthly — up to 5 users), MAX ($299/mo annual, $329/mo monthly — up to 8 users, then $35/user/month). No contract on any plan; 14-day free trial on MAX.
+
+### Strengths
+- Genuinely easy to set up and use — consistently high ease-of-use ratings (4.6–4.7/5 on Capterra), without ServiceTitan's long onboarding.
+- Strong consumer-facing marketing layer built in as a first-class feature, not a bolt-on: review generation, email/postcard marketing, and built-in consumer financing.
+- No contract lock-in on any plan — cancel anytime, a real financial protection compared to ServiceTitan.
+
+### Weaknesses / Complaints
+- **Add-on cost creep is the #1 reported complaint.** Core tools like the flat-rate price book ($149/mo), vehicle GPS ($20/vehicle/mo), and sales proposals ($40/mo) are all separate paid add-ons — a 5-person team with common add-ons easily spends $500+/month, well above the advertised $189 Essentials price.
+- **No route optimization on any plan** as of 2026 — technicians plan routes manually or via a separate tool, unlike ServiceTitan and Jobber.
+- **Per-user fees stack past the included cap** — $35/month per additional user on MAX; Essentials caps at 5 users before forcing an upgrade.
+- **Android app quality lags iOS significantly** — 3.2/5 vs 4.5/5 rating, with recurring complaints of slow performance, crashes, and sync issues on Android.
+- Limited customization (no custom fields) and reporting that stays fairly basic even on the top MAX tier.
+
+### What We Do Differently
+- One flat plan tier includes AI SMS booking and missed-call text-back — Housecall Pro has no natural-language AI control and no built-in missed-call lead capture, the exact gap our "AI front desk" positioning is built around.
+- No add-on trap: our tiers ($97/$297/$497) are proportional to a defined feature set, not a low sticker price with the tools a business actually needs sold separately on top.
+- Route optimization is a real, current gap for Housecall Pro (not available on any plan as of this sync) — worth watching as a differentiator if we prioritize it.
+
+---
+
 ## Positioning Summary
 
 **Our positioning:** Nexaflow sits between GHL's agency-grade complexity and HubSpot's enterprise pricing cliff — purpose-built for a single home service business that needs an AI front desk, not a marketing department's worth of tools.

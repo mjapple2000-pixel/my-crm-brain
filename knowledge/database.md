@@ -93,6 +93,9 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 - **forms** — lead capture forms. `business_id` required.
 - **form_submissions** — form submission records. Scoped via `form_id` → business; verify join.
 - **smart_lists** — saved contact filters/segments. `business_id` required.
+- **referrals** — a tracked referral: an existing lead (`referrer_id`/`referrer_type`) who referred a new lead (`referred_lead_id`). `business_id` required. Confirmed columns: `business_id`, `referrer_type` (`'lead'`, with a code comment noting a future `'contact'` B2B type), `referrer_id`, `referred_lead_id`, `deleted_at`. Written by `handle-referral-signup`.
+- **referral_reward_settings** — a business's referral-program reward configuration (percentage of paid invoice, minimum job size to qualify). `business_id` required. Full columns not yet confirmed — read/written via `settings_screen.dart` `_rewardDb` calls (~lines 1036-1184) but I haven't traced the exact column list. Flagging for next pass.
+- **referral_reward_recipients** — presumably tracks who has earned/been paid a referral reward; read/written in `settings_screen.dart` (~line 11498) and `reporting_screen.dart`. Columns not yet confirmed — flagging for next pass rather than guessing.
 
 ---
 

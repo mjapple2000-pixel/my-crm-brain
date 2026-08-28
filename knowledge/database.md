@@ -128,6 +128,14 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ---
 
+## Billing / Usage
+
+- **business_usage** — per-business, per-month AI-message usage counter, replacing the dead `minutes_used_this_month`/`included_minutes` scaffolding previously noted in Possibly Missing/Unclear below (that item can now be removed — see Business Rules). Confirmed columns (from `report-ai-overage`): `id`, `business_id`, `period_start`, `ai_messages_used`, `ai_messages_included`, `overage_units_reported`. Read via a `get_business_usage_summary` Postgres RPC (Settings → Billing, `_BillingSectionState._loadUsage`, `settings_screen.dart` ~line 4266) which returns `ai_messages_used`, `ai_messages_included`, `is_overage`.
+- **business_usage_live** — appears to be a view/live variant of `business_usage` (selected in `report-ai-overage` instead of the base table, joined out to `businesses.client_id`) but I have not confirmed whether it's a table or a database view, or its full column set. Flagging for next pass.
+- **dashboard_insights** — stores each business's AI-generated weekly insight. `business_id` required (inferred). Written by `generate-weekly-insight`; full column list not yet confirmed. Flagging for next pass.
+
+---
+
 ## Misc
 
 - **trigger_links** — trackable links created per-business for campaigns. `business_id` confirmed present in insert code (`conversations_screen.dart`, `handle-trigger-link` edge function). RLS policy status unverified (no migration files in repo) — check Supabase dashboard.

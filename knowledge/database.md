@@ -147,7 +147,6 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Possibly Missing / Unclear — Needs Confirmation
 
-- **Team Members / Permissions** — referenced in Settings UI. Confirm whether this is its own table (e.g. `team_members`, `permissions`, `roles`) or modeled via `profiles` + role column.
 - **Business Hours** — referenced in roadmap (`_visibleHourRange()` in calendar). Confirm whether this is a dedicated table, a JSON column on `businesses`, or part of `calendars`.
 - **Stripe / Subscription state** — confirmed: billing columns live directly on businesses. Columns written by stripe-webhook: is_paid(bool),client_id(Stripe customer ID),subscription_id, plan(tier: starter|growth|pro, kept after cancellation),subscription_status(Stripe lifecycle: active|trialing|past_due|cancelled — NOT the tier, see Business Rules Plan Gating). No separatesubscriptionsorstripe_customerstable exists. The `minutes_used_this_month`/`included_minutes` scaffolding previously noted here is gone — no references remain anywhere in the codebase as of this sync. It's been replaced by the `business_usage`/`business_usage_live` tables and `get_business_usage_summary` RPC (see Billing / Usage section above).
 - **Webhook / inbound SMS logs** — useful for debugging Make scenarios and the SMS booking flow. Confirm whether this is covered by `automation_logs` / `ai_usage_logs` or needs its own table.

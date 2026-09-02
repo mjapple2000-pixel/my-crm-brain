@@ -95,7 +95,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 - **smart_lists** — saved contact filters/segments. `business_id` required.
 - **referrals** — a tracked referral: an existing lead (`referrer_id`/`referrer_type`) who referred a new lead (`referred_lead_id`). `business_id` required. Confirmed columns: `business_id`, `referrer_type` (`'lead'`, with a code comment noting a future `'contact'` B2B type), `referrer_id`, `referred_lead_id`, `deleted_at`. Written by `handle-referral-signup`.
 - **referral_reward_settings** — a business's referral-program reward configuration (percentage of paid invoice, minimum job size to qualify). \business_id` required, unique per business (upserts use `onConflict: 'business_id'`). Confirmed columns (from `settings_screen.dart` `_rewardDb` upserts, lines 1206–1354): `business_id`, `mode`, `default_amount`, `default_reward_type`, `default_reward_basis`, `minimum_payout_threshold`.
-- **referral_reward_recipients** — presumably tracks who has earned/been paid a referral reward; read/written in `settings_screen.dart` (~line 11498) and `reporting_screen.dart`. Columns not yet confirmed — flagging for next pass rather than guessing.
+- **referral_reward_recipients** — tracks who has earned a referral reward and at what amount. \business_id` required. Confirmed columns (from `settings_screen.dart` insert/update code, lines 12315–12328): `id`, `business_id`, `referrer_type`, `referrer_id`, `amount`, `reward_type`, `reward_basis`, `deleted_at`. Note: NOT read/written in `reporting_screen.dart` — that screen only reads the `referrals` table for its leaderboard.
 
 ---
 

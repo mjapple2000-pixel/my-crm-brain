@@ -267,7 +267,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
   ### Jobs Hub
   - **Status:** In Progress
-  - **Description:** \/jobs` screen, 5-tab hub: Quotes, Invoices, Service Requests, and Job Forms are all live and working (job_forms_screen.dart builds/edits forms; job_form_submissions are attached to appointments and filled out via the Employee Hub). Only "Time & expenses" remains UI-labeled "Coming Soon" (_ComingSoonTab with a _SoonBadge in jobs_screen.dart, line ~50) inside this specific screen — note that clock-in/out time tracking itself is built and live elsewhere in the app (main_layout.dart, appointments_screen.dart, and the clock-in-out edge function), just not surfaced inside this Jobs Hub tab yet.`
+  - **Description:** \/jobs` screen, 5-tab hub: Quotes, Invoices, Service Requests, and Job Forms are all live and working (job_forms_screen.dart builds/edits forms; job_form_submissions are attached to appointments and filled out via the Employee Hub). Only "Time & expenses" remains UI-labeled "Coming Soon" (_ComingSoonTab, used at jobs_screen.dart line 66, class defined at line 739; _SoonBadge at line 253) inside this specific screen — note that clock-in/out time tracking itself is built and live elsewhere in the app (main_layout.dart, appointments_screen.dart, and the clock-in-out edge function), just not surfaced inside this Jobs Hub tab yet.`
   - **Tables:** N/A (container screen only)
   - **Issues:** None known for the built tabs.
 

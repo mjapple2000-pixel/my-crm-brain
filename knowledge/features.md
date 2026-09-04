@@ -224,7 +224,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Full flow is live. (1) `reviews_screen.dart` (314 lines) is accessible via the main sidebar navigation under a Reviews entry (gated by `_can('settings')`). It reads and saves `google_review_link`, `facebook_review_link`, and `review_request_delay_minutes` on the `businesses` table. (2) Automation Builder wiring is live — `appointment_completed` trigger and `send_review_request` action both exist in `automations_screen.dart`. Note: a duplicate `_ReviewsSection` widget also exists inside `settings_screen.dart` (line 11470) but is dead code — never referenced in the settings sidebar or switch statement. The functional screen is the standalone `/reviews` route.
 - **Tables:** `businesses` (google_review_link, facebook_review_link, review_request_delay_minutes), `automations`, `automation_enrollments`, `automation_logs`
-- **Issues:** `_ReviewsSection` inside `settings_screen.dart` (line 6357) is dead code — never wired to a settings tab. Does not block the feature but is a cleanup item.
+- **Issues:** `_ReviewsSection` inside `settings_screen.dart` (line 11470) is dead code — never wired to a settings tab. Does not block the feature but is a cleanup item.
   
 ### Missed Call Text Back
 - **Status:** Built

@@ -291,7 +291,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
   ### Service Library
   - **Status:** Built
-  - **Description:** Settings → Service Library tab (`_ServiceLibrarySection`, `settings_screen.dart` ~line 6816) for managing a business's preset services and default prices, used to prefill quote/invoice line items.
+  - **Description:** Settings → Service Library tab (`_ServiceLibrarySection`, `settings_screen.dart` line 8491) for managing a business's preset services and default prices, used to prefill quote/invoice line items.
   - **Tables:** `service_library`
   - **Issues:** None known.
 

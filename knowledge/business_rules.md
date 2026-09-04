@@ -23,7 +23,7 @@ These rules are non-negotiable. Any AI agent generating database changes, code, 
 
 - All primary keys are `bigint` (auto-incrementing) — not UUIDs.
 - Never reuse or guess IDs — always let the database generate them automatically via `bigint` serial/identity columns.
-- Exception found: quotes.id and invoices.id are NOT bigint — code casts them as String in three places (new_quote_screen.dart line 260, new_invoice_screen.dart line 237, quote_detail_screen.dart line 765), which only works if the underlying column is text/uuid. This contradicts the bigint-only rule above. Flagging for Mike to confirm intent rather than auto-correcting either the code or the rule.
+- Exception found: quotes.id and invoices.id are NOT bigint — code casts them as String in three places (new_quote_screen.dart line 353, new_invoice_screen.dart line 429, quote_detail_screen.dart line 977), which only works if the underlying column is text/uuid. This contradicts the bigint-only rule above. Flagging for Mike to confirm intent rather than auto-correcting either the code or the rule.
 
 ## Deletes
 

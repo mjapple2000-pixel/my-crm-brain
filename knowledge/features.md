@@ -232,6 +232,30 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `call_logs`, `conversations`, `messages`, `businesses` (reads `ai_phone_number`, `owner_phone`, `missed_call_text_message`, `business_name`)
 - **Issues:** "Confirm RLS status and whether reply_sent deduplication is working correctly end-to-end."
 
+### Gmail Email Sync
+- **Status:** Built
+- **Description:** Business can connect a Gmail account (Growth+ plan) from Settings → Email Config (`_EmailConfigSectionState`, `settings_screen.dart` line 4397). Inbound Gmail messages sync via Google Pub/Sub push (`gmail-inbound-webhook`) with a polling fallback (`gmail-poll-fallback`) and watch renewal (`gmail-watch-renew`), landing in the same `conversations`/`messages` tables as SMS. Server-side gated via `check_plan_feature(business_id, "gmail_sync")` at connect time.
+- **Tables:** `oauth_connections`, `gmail_sync_state`, `pubsub_dedup`, `conversations`, `messages`, `leads`
+- **Issues:** None known from code alone.
+
+### PTO (Paid Time Off)
+- **Status:** Built
+- **Description:** Employees request time off from `/settings/my-pto` (`employee_pto_screen.dart`); owners/admins set policy at `/settings/pto-policy` and approve/deny at `/settings/pto-requests`. Approved PTO hours feed into timesheets, PDF exports, and QuickBooks payroll hours sync. Gated client-side only via `check_plan_feature(business_id, "pto_tracking")` — no edge function that reads/writes `pto_requests` calls it server-side.
+- **Tables:** `pto_requests`
+- **Issues:** ⚠️ No server-side plan enforcement — same gap as AI Form Recreation. See Open Questions.
+
+### Overtime Tracking / Payroll Settings
+- **Status:** Built
+- **Description:** New "Payroll" settings tab (`_PayrollSettingsSection`, `settings_screen.dart` line 11307) lets a business set daily/weekly overtime thresholds. `check-overtime-thresholds` edge function reads `time_entries`/`time_entry_breaks` against `overtime_rules` and logs/sends alerts via `overtime_notifications`. Gated behind `check_plan_feature` (feature key `overtime_tracking`, already noted in Business Rules) via `get-timesheets`/`export-timesheets-pdf`.
+- **Tables:** `overtime_rules`, `time_entry_breaks`, `overtime_notifications`
+- **Issues:** None known from code alone.
+
+### Owner Notifications (New Lead / New Appointment)
+- **Status:** Built
+- **Description:** Automatic owner alert on every new lead or new appointment, implemented as Postgres triggers (`notify_owner_new_lead`, `notify_owner_new_appointment`, added in `supabase/migrations/20260811210530_...sql` and `20260811212118_...sql`) that call the `notify-owner` edge function directly from the database — no Flutter code involved in firing this.
+- **Tables:** `leads`, `appointments` (trigger source only — no new table)
+- **Issues:** None known from code alone.
+
 ---
 
 ## Support / Tickets

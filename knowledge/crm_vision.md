@@ -27,7 +27,7 @@ If a business doesn't take appointments, doesn't get inbound calls/texts from cu
 
 ## Current Scope Priorities
 
-- **Feature bloat from the GHL/HubSpot feature-parity checklist.** We track competitor features in `competitors.md`, but "they have it" is not a reason to build it. Specifically:
+- **We build what's best for the home-service businesses we serve, not for feature-parity with GHL/HubSpot.** We track competitor features in `competitors.md`, but "they have it" is not by itself a reason to build it. Right now, that means:
   - **Memberships, Websites/Funnels, Social Planner** — intentionally **Not Started and staying that way** for now. These are full product categories on their own (community platforms, page builders, social schedulers) that would pull focus from the AI-booking differentiator and are poorly suited to a small operator's actual workflow. Revisit only if customers consistently ask for them as a dealbreaker.
   - **Email Marketing as a full platform** (drag-and-drop builders, A/B testing, deliverability tooling) — **Not Started, low priority.** A simple campaign/broadcast tool may eventually be worth building, but a Mailchimp-style platform is explicitly out of scope, for now.
   - **White Label** — **Not Started, intentionally deferred.** This is an agency/reseller feature for a different customer segment (marketing agencies managing client accounts) than our target (the business owner themselves). Revisit only if we pivot toward an agency channel.

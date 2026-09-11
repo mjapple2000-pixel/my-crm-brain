@@ -128,6 +128,41 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ---
 
+## Email (Gmail Sync)
+
+- **oauth_connections** — a business's connected third-party OAuth account (currently `gmail` only). Confirmed columns (from `gmail-oauth-connect/index.ts` insert, lines 168–180): `business_id`, `provider` ('gmail'), `connected_account_email`, `access_token_secret_id`, `refresh_token_secret_id` (Supabase Vault secret refs), `token_expires_at`, `connection_status` ('active', at minimum), `deleted_at`, `updated_at`.
+- **gmail_sync_state** — tracks Gmail History API sync position per connection. Confirmed columns (from `gmail-oauth-connect/index.ts` and `gmail-inbound-webhook/index.ts`): `oauth_connection_id` (FK → `oauth_connections`), `history_id`, `updated_at`.
+- **pubsub_dedup** — dedup table for Google Pub/Sub push notifications (prevents double-processing the same Gmail push message). Confirmed column: `message_id` (from `gmail-inbound-webhook/index.ts` line 413).
+- **platform_settings** — appears to be a global (non-per-business) settings table read by `gmail-inbound-webhook/index.ts` line 86. Purpose and full column set not yet confirmed — flagging for next pass.
+
+---
+
+## PTO / Overtime / Payroll
+
+- **pto_requests** — an employee's paid-time-off request. Confirmed columns (from `employee_pto_screen.dart` insert, lines 365–372): `business_id`, `profile_id`, `start_date`, `end_date`, `hours_requested`, `status` ('pending', at minimum — approve/deny logic lives in `pto_requests_screen.dart`), `note`. Read by `get-timesheets`, `export-timesheets-pdf`, `quickbooks-sync-hours`, and `notify-pto-request` (which emails the owner on new submission).
+- **overtime_rules** — a business's daily/weekly overtime thresholds. Confirmed columns (from `settings_screen.dart` `_PayrollSettingsSectionState`, lines 11307–11780): `business_id`, `daily_threshold_hours`, `daily_ot_enabled`, `weekly_threshold_hours`, `weekly_ot_enabled`, `updated_at`, `deleted_at` (code comment at line 11747 confirms a partial unique index on `business_id WHERE deleted_at IS NULL`).
+- **time_entry_breaks** — break periods logged against a `time_entries` row, used by `check-overtime-thresholds` to compute actual worked hours. Full column set not yet confirmed — flagging for next pass.
+- **overtime_notifications** — logs sent overtime-threshold alerts (dedup/audit trail for `check-overtime-thresholds`). Full column set not yet confirmed — flagging for next pass.
+- **pay_periods** — a business's payroll period definitions, read/written by `decide-timesheet` and `submit-timesheet`. Full column set not yet confirmed — flagging for next pass.
+- **employee_pay_period_status** — per-employee submission/approval status for a pay period. Full column set not yet confirmed — flagging for next pass.
+- **pay_period_status_history** — audit trail of status changes on `employee_pay_period_status`. Full column set not yet confirmed — flagging for next pass.
+- **team_member_provider_mappings** — maps a `profiles` row to its corresponding QuickBooks employee record (same pattern as `accounting_customer_links`, but for staff instead of leads). Written/read by `quickbooks-sync-hours`. Full column set not yet confirmed — flagging for next pass.
+
+---
+
+## Owner Notifications
+
+- No new table — this is implemented as two Postgres trigger functions defined directly in a migration (`supabase/migrations/20260811210530_...sql`, updated by `20260811212118_...sql`): `notify_owner_new_lead()` (fires `AFTER INSERT` on `leads`) and `notify_owner_new_appointment()` (fires `AFTER INSERT` on `appointments`). Both call the `notify-owner` edge function via `net.http_post` with an `x-cron-secret` header, passing lead/appointment details so the owner gets notified automatically.
+
+---
+
+## Seat / Beta Billing
+
+- **business_seats_live** — appears to be a view/live variant feeding seat-based billing overage, read by `sync-seat-overage` alongside `businesses` and `cron_run_log`. Not yet confirmed whether it's a table or view, or its full column set — flagging for next pass, same treatment as `business_usage_live` above.
+- **system_alert_log** — a general internal alert log, written to by `decide-timesheet` (line 26). Full column set not yet confirmed — flagging for next pass.
+
+---
+
 ## Billing / Usage
 
 - **business_usage** — per-business, per-month AI-message usage counter, replacing the dead `minutes_used_this_month`/`included_minutes` scaffolding previously noted in Possibly Missing/Unclear below (that item can now be removed — see Business Rules). Confirmed columns (from `report-ai-overage`): `id`, `business_id`, `period_start`, `ai_messages_used`, `ai_messages_included`, `overage_units_reported`. Read via a `get_business_usage_summary` Postgres RPC (Settings → Billing, `_BillingSectionState._loadUsage`, `settings_screen.dart` ~line 4266) which returns \ai_messages_used`, `ai_messages_included`, `is_overage` (`_loadUsage` now at `settings_screen.dart` line 4515, not 4266).

@@ -51,8 +51,7 @@ These rules are non-negotiable. Any AI agent generating database changes, code, 
 ## AI Agents — General Rules
 
 - Always read `crm_vision.md`, `tech_stack.md`, `database.md`, and this file before proposing changes.
-- Never propose features that conflict with `crm_vision.md` ("Things We Avoid").
-- Prefer Supabase-native solutions (Edge Functions, triggers, cron) over Make for new work.
+- Never propose features that conflict with the scope decisions in `crm_vision.md`.
 - Flag any schema change that affects RLS policies — these require extra care and explicit review.
 - Never write directly to production. All changes go through review/approval first.
 

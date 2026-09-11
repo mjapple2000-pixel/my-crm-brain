@@ -414,7 +414,7 @@ These affect multiple areas above and should be considered before AI agents prop
 
 1. **`messages` RLS pending re-enable** — affects Conversations, AI SMS flow, AI Chat Widget.
 2. **`conversation_views` RLS disabled** — affects Saved Filter Views.
-3. `snippets` and `trigger_links` — `business_id` column confirmed present in app insert code. RLS policy correctness unverified — no migration files in repo, needs Supabase dashboard check.
+3. `snippets` and `trigger_links` — `business_id` column confirmed present in app insert code. RLS policy correctness unverified — migration files now exist in the repo but none touch these tables, needs Supabase dashboard check.
 4. `deals` — `contact_id` FK debt resolved; now uses `lead_id` FK referencing `leads` table.
 5. **Calendar grid filtering checkboxes are non-functional** — affects any feature relying on filtered calendar views.
 6. **Team/permissions data model unconfirmed** — affects any feature gating by role.

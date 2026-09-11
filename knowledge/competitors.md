@@ -114,7 +114,7 @@ This file helps AI agents understand our competitive positioning so they don't s
 
 ### Features Outside Current Scope For Now
 
-(See `crm_vision.md` → "Things We Avoid" for full context.)
+(See `crm_vision.md` → "Current Scope Priorities" for full context.)
 
 - **Memberships, Websites/Funnels, Social Planner** — GHL has all of these as part of its "all-in-one" pitch to agencies. We won't build them because our customer isn't running membership communities or managing client funnels — and trying to match this breadth is exactly the feature-bloat trap that makes GHL's UX overwhelming for a solo operator.
 - **White Label / Sub-account reselling** — GHL's entire pricing tier structure (Starter vs. Unlimited vs. Agency Pro) is built around this. We intentionally don't compete on "manage other businesses' CRMs" — our customer *is* the business, not an agency managing it.

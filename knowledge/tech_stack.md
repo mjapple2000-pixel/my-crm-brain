@@ -16,7 +16,7 @@ AI / LLM: OpenAI (gpt-4o-mini) — used by ai-chat, receive-sms, receive-email, 
 
 OCR: AWS Textract (extract-job-form-ai edge function only) — reads AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY env vars
 
-Accounting: QuickBooks Online (Intuit) — quickbooks-oauth-connect, quickbooks-sync-contact, quickbooks-sync-invoice edge functions; OAuth tokens stored via Supabase Vault (qb_vault_read_secret RPC), never in plaintext
+Accounting: QuickBooks Online (Intuit) — quickbooks-oauth-connect, quickbooks-sync-contact, quickbooks-sync-invoice, quickbooks-sync-hours, quickbooks-list-employees, quickbooks-token-refresh edge functions; OAuth tokens stored via Supabase Vault (qb_vault_read_secret RPC), never in plaintext
 
 Sales tax rates: salestaxzip.com — lookup-tax-rate edge function, cached locally in tax_rate_zip_lookup (30-day TTL)
 

@@ -112,7 +112,7 @@ This file helps AI agents understand our competitive positioning so they don't s
 
 **Our positioning:** Nexaflow sits between GHL's agency-grade complexity and HubSpot's enterprise pricing cliff — purpose-built for a single home service business that needs an AI front desk, not a marketing department's worth of tools.
 
-### Features We Intentionally Will NOT Build
+### Features Outside Current Scope For Now
 
 (See `crm_vision.md` → "Things We Avoid" for full context.)
 

@@ -25,7 +25,7 @@ If a business doesn't take appointments, doesn't get inbound calls/texts from cu
 
 - **AI Assisted** — AI isn't a chatbot widget tacked onto a contact form. It's wired into the actual workflow that drives revenue: the SMS booking state machine reads from the business's own knowledge base, books real appointments, and writes back into the same `conversations`/`messages`/`appointments` tables a human would use. AI usage is also tracked per business (`ai_usage_logs`) so cost stays predictable as this scales.
 
-## Things We Avoid
+## Current Scope Priorities
 
 - **Feature bloat from the GHL/HubSpot feature-parity checklist.** We track competitor features in `competitors.md`, but "they have it" is not a reason to build it. Specifically:
   - **Memberships, Websites/Funnels, Social Planner** — intentionally **Not Started and staying that way** for now. These are full product categories on their own (community platforms, page builders, social schedulers) that would pull focus from the AI-booking differentiator and are poorly suited to a small operator's actual workflow. Revisit only if customers consistently ask for them as a dealbreaker.

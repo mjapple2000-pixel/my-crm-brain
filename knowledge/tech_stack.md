@@ -10,7 +10,7 @@ Automation (fallback only): Make — use only when Supabase cannot handle the ta
 
 SMS: Twilio
 
-Email: Mailgun
+Email: Mailgun (outbound + inbound receive-email) plus Gmail sync (OAuth, Growth+ plan) via gmail-oauth-connect, gmail-inbound-webhook, gmail-poll-fallback, gmail-watch-renew edge functions
 
 AI / LLM: OpenAI (gpt-4o-mini) — used by ai-chat, receive-sms, receive-email, nexaflow-support, send-invoice, send-quote, send-milestone-invoice, generate-weekly-insight, daily-ticket-digest, and extract-job-form-ai edge functions
 

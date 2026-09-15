@@ -204,7 +204,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 ### Campaigns
 - **Status:** Built
 - **Description:** Full SMS and email campaign system. Create/edit/delete campaigns with SMS or Email type, audience filtering by tags/lead_status/source, optional scheduling (`scheduled_at`), and Send Now flow. Send Now calls the `send-campaign` edge function which filters leads by `filter_config`, excludes DND contacts, queues rows into `campaign_contacts`, then `dispatch-campaign-sms` delivers in batches of 10 via Twilio. Status lifecycle: draft → scheduled → sending → sent/active. Smart Lists manager is accessible from the Campaigns top bar.
-- **Tables:** `campaigns`, `campaign_contacts`, `leads`, `conversations` (DND check)
+- **Tables:** `campaigns`, `campaign_contacts`, `leads`, `conversations` (DND check). A `preview-campaign-audience` edge function also exists for showing a live matching-lead count before Send Now — no new table, reads the same `leads`/`filter_config` logic `send-campaign` uses.
 - Email campaigns are now fully wired: send-campaignqueues by channel, and thedispatch-campaign-emailedge function (batches of 10 via Mailgun, same pattern asdispatch-campaign-sms) delivers them. The old 'saved but not sent' gap is resolved.
 
 

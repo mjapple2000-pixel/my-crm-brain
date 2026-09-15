@@ -54,6 +54,12 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `conversations`, `messages`
 - **Issues:** ⚠️ `messages` RLS pending re-enable (tracked exception).
 
+### AI Draft Reply Review (Email)
+- **Status:** Built
+- **Description:** Per-business setting `businesses.email_ai_reply_mode` (`'autopilot'` default, or `'draft'`) toggled in the same Email Config settings section as Gmail/Outlook (`settings_screen.dart` lines 4957–4958), plus a per-conversation override `conversations.ai_reply_mode_override`. In `'draft'` mode, an AI-generated email reply is saved to `messages` with `status: 'pending_review'` instead of sending, and surfaced in the Conversations screen (`conversations_screen.dart` line 158 `isPendingReview` getter) for a human to approve-as-is or edited (`approve-draft-reply` edge function, line 463) or discard (`discard-draft-reply`, line 521). `notify-stale-drafts` alerts if a draft sits unreviewed. Confirmed live in both `receive-email/index.ts` (Mailgun inbound) and `microsoft-graph-webhook/index.ts` (Outlook inbound).
+- **Tables:** `messages` (`status`, `original_ai_body`, `sender_name` columns), `conversations` (`ai_reply_mode_override`), `businesses` (`email_ai_reply_mode`)
+- **Issues:** Gmail inbound mail (`gmail-inbound-webhook`) does NOT check `email_ai_reply_mode` or write `pending_review` — draft mode currently only covers Mailgun and Outlook inbound email. Flagging as an open question rather than assuming it's intentional.
+
 ### Saved Filter Views
 - **Status:** Built
 - **Description:** Save and reuse conversation filter configurations.

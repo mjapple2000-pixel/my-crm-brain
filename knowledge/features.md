@@ -445,7 +445,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Superuser Impersonation
 - **Status:** Built
-- **Description:** Business switcher in sidebar for superusers, with Mine/All toggle hidden for owners/superusers via `_isOwnerOrSuperuser` flag.
+- **Description:** Business switcher in sidebar for superusers, with Mine/All toggle hidden for owners/superusers via `_isOwnerOrSuperuser` flag. Business list is fetched via the `get-all-businesses` edge function (`business_picker_screen.dart` line 59).
 - **Tables:** `superusers`, `businesses`, `profiles`
 - **Issues:** Per Business Rules, superuser access bypassing normal scoping should be logged — not yet confirmed if audit logging exists for impersonation sessions.
 

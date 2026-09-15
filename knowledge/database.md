@@ -30,7 +30,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Conversations / Messaging
 
-- **conversations** — message threads. `business_id` required.
+- **conversations** — message threads. `business_id` required. Also confirmed present (all from `receive-email/index.ts`): `ai_enabled` (bool — set `false` to pause AI on this conversation), `flagged_for_abuse` (set when a conversation hits 45 AI replies in a rolling 24h — the "abuse circuit breaker", line 769), `flagged_for_beta_cap` (set when a beta business hits its usage cap with no card on file, line 799), `ai_reply_count_24h` / `ai_reply_window_reset_at` (drive the abuse breaker, lines 762/1057), `ai_reply_mode_override` (per-conversation override of the business's `email_ai_reply_mode` — `'autopilot'` or `'draft'`, line 1070).
 - **conversation_views** — saved filter views for the Conversations screen. ⚠️ **RLS currently disabled** — tracked exception, pending fix. Should have `business_id` (and likely `user_id` for per-user saved views).
 - **messages** — individual messages. `business_id` required. ⚠️ **RLS pending re-enable** — tracked exception in Business Rules.
 - **support_chats** — support conversations with staff. Scoped to business + superuser visibility.

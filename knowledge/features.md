@@ -455,6 +455,39 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `beta_testers`, `businesses`
 - **Issues:** None known.
 
+
+## Superuser / Internal Tools
+
+### Unmatched Inbound Emails
+- **Status:** Built
+- **Description:** Read-only superuser screen at `/unmatched-emails` listing inbound emails that couldn't be matched to any business's `dedicated_email`, so a misconfigured Mailgun domain doesn't go unnoticed. No editing, no workflow — visibility only.
+- **Tables:** `unmatched_inbound_emails`
+- **Issues:** None known from code alone.
+
+### Platform Settings (Email Relevance Threshold)
+- **Status:** Built
+- **Description:** Superuser-only screen at `/platform-settings` for tuning the EM-03 email relevance threshold (default 0.9) that `receive-email`/`gmail-inbound-webhook` use to decide whether an inbound email gets an AI reply.
+- **Tables:** `platform_settings`
+- **Issues:** None known from code alone.
+
+### Client Document (PDF) Branding
+- **Status:** Built
+- **Description:** Settings → Documents tab (`_ClientDocumentSettingsSection`, `settings_screen.dart` line 10896) lets a business customize job-form PDF branding — brand/accent color, header layout/style, logo size, footer text, disclaimer text, and show/hide toggles for company phone/email/website, page numbers, and generated date. Stored as `businesses.pdf_settings` (jsonb), read by `generate-job-form-pdf`.
+- **Tables:** `businesses` (`pdf_settings`)
+- **Issues:** Not confirmed whether this also affects invoice/quote PDFs, or job-form PDFs only — see Open Questions.
+
+### Appointment Address Geocoding
+- **Status:** Built
+- **Description:** Appointments and the Attach Job Form dialog can geocode a typed address into `latitude`/`longitude` via the `geocode-location` edge function (Nominatim/OpenStreetMap), for map/route display.
+- **Tables:** `appointments`
+- **Issues:** None known from code alone.
+
+### Client Portal Link (Manual Generate/Resend)
+- **Status:** Built
+- **Description:** Staff can generate or resend a lead's client portal link on demand from Contact Detail (`generate-client-portal-link`), rather than relying only on the automatic link created the first time a quote or invoice is sent.
+- **Tables:** `leads` (`client_access_token`)
+- **Issues:** None known from code alone.
+
 ---
 
 ## Cross-Cutting Open Items

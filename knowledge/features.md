@@ -176,7 +176,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Automation Builder
 - **Status:** Built
-- **Description:** Visual automation builder.
+- **Description:** Visual automation builder. Confirmed trigger types (`automations_screen.dart` `_triggerLabel`, line 319): `new_lead`, `email_received`, `form_submitted`, `appointment_booked`, `status_changed`, `appointment_completed`, `job_form_completed`, `referral_converted`, `quote_not_responded`. Confirmed action types (`_actionLabel`, line 1217): `send_sms`, `send_email`, `add_tag`, `move_pipeline_stage`, `notify_owner`, `send_review_request`, `wait_until`, `delay_relative_to_appointment`.
 - **Tables:** `automations`
 - **Issues:** None known.
 

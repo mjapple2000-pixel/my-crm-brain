@@ -49,7 +49,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Calendar / Appointments
 
-- **appointments** — scheduled appointments. `business_id` required.
+- **appointments** — scheduled appointments. `business_id` required. Also confirmed present: `latitude`, `longitude` (set by the `geocode-location` edge function from a typed address; used for map/route display).
 - **calendars** — calendar definitions. `business_id` required.
 - **calendar_rooms** — bookable rooms. Scoped via `calendar_id` → business; verify join.
 - **calendar_equipment** — bookable equipment. Scoped via `calendar_id` → business; verify join.

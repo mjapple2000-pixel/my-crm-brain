@@ -326,10 +326,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
   - **Tables:** `quotes`, `line_items`, `leads`, `service_library`
   - **Issues:** Not plan-gated — available on all tiers, unlike Job Costing.
 
-  ### Invoices & Payments
+    ### Invoices & Payments
   - **Status:** Built
-  - **Description:** Create/edit invoices (standalone or converted from a quote), sequential `INV-###` numbering. Send via SMS or email (AI-drafted, `send-invoice` edge function). Client pays via a Stripe-hosted payment page; `stripe-connect-webhook` marks the invoice `paid` automatically on `payment_intent.succeeded`. Requires the business to have completed Stripe Connect onboarding (`stripe_connect_ready` on `businesses`) or payment collection is blocked.
-  - **Tables:** `invoices`, `line_items`, `payment_links`, `leads`
+  - **Description:** Create/edit invoices (standalone or converted from a quote), sequential `INV-###` numbering. Send via SMS or email (AI-drafted, `send-invoice` edge function). The Stripe Checkout session itself is created by `create-invoice-payment`, which supports paying the whole invoice OR, for progress-billed invoices, one milestone at a time (validates the milestone belongs to the invoice and is in a payable status first). A platform fee (`application_fee_amount`, from `PLATFORM_FEE_PERCENT`) is applied on top of every charge — see Business Rules. `stripe-connect-webhook` marks the invoice (or the specific milestone) `paid` on `checkout.session.completed`, matching by `stripe_checkout_session_id`; a progress-billed invoice only flips to `paid` once every milestone is paid. Requires the business to have completed Stripe Connect onboarding — `businesses.stripe_connect_ready` is now set directly from Stripe's own `account.updated` webhook (`charges_enabled && payouts_enabled`), fixing an earlier bug where it only flipped true after a first payment already happened (meaning a business could never take its first payment).
+  - **Tables:** `invoices`, `invoice_milestones`, `line_items`, `payment_links`, `leads`
   - **Issues:** None known from code alone.
 
   ### Client Portal

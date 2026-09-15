@@ -80,8 +80,8 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Inbound Email
 - **Status:** Built
-- **Description:** Inbound email via Mailgun → `receive-email` edge function → creates/updates conversation.
-- **Tables:** `conversations`, `messages`
+- **Description:** Inbound email via Mailgun → `receive-email` edge function → creates/updates conversation. A relevance-scoring step (EM-03) runs on every inbound email — `receive-email`/`gmail-inbound-webhook` score how likely the sender is a genuine customer vs. an automated/notification address, and suppress the AI reply (the message is still saved) when the score falls below a superuser-tunable threshold stored in `platform_settings`.
+- **Tables:** `conversations`, `messages`, `platform_settings`
 - **Issues:** None known beyond general `messages` RLS note above.
 
 ---

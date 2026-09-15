@@ -20,6 +20,8 @@ Accounting: QuickBooks Online (Intuit) — quickbooks-oauth-connect, quickbooks-
 
 Sales tax rates: salestaxzip.com — lookup-tax-rate edge function, cached locally in tax_rate_zip_lookup (30-day TTL)
 
+Geocoding: Nominatim (OpenStreetMap) — geocode-location edge function only, converts a typed appointment address into latitude/longitude, called from the Appointments screen and the Attach Job Form dialog
+
 Payments: Stripe
 
 Hosting: Firebase Hosting (web build) + Supabase (backend/data)

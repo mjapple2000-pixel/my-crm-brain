@@ -404,9 +404,9 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Beta Bypass
 - **Status:** Built
-- **Description:** Stripe paywall bypassed for businesses flagged `is_beta`.
-- **Tables:** `businesses`, `beta_testers`
-- **Issues:** None known.
+- **Description:** Stripe paywall bypassed for businesses flagged `is_beta`. As of this sync, beta access is no longer unconditionally unlimited: see the new beta usage cap noted in Business Rules (`businesses.beta_card_added`, `create-beta-card-setup`, `notify-beta-cap-reached`).
+- **Tables:** `businesses` (`is_beta`, `beta_card_added`), `beta_testers`, `business_usage_live`
+- **Issues:** See Business Rules — flagged for Mike to confirm the cap is intentional before treating it as settled.
 
 ### Plan Upgrades (Proration)
 - **Status:** Planned

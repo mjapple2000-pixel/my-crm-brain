@@ -77,3 +77,7 @@ Feature access is gated by plan tier. This is non-negotiable — without gating 
 - When a customer hits a gated feature they don't have access to, they see an upgrade prompt, not an error. Confirmed in 4 screens: reporting_screen.dart (lines 299 and 330), pipelines_screen.dart (line 2585), appointments_screen.dart (lines 6154 and 7505), and routes_screen.dart (line 364) all check for {error: \"upgrade_required\"} from the server.
 - Usage limits also apply by tier (AI message usage, tracked monthly). This is now built: see database.md's \business_usage`/`business_usage_live` tables and the `get_business_usage_summary` RPC, surfaced in Settings → Billing. The old `businesses.minutes_used_this_month`/`included_minutes` scaffolding referenced here previously has been fully removed from the codebase — zero references remain.
 - We are not racing to the bottom on pricing. Never propose reducing tier prices or collapsing tiers without explicit instruction.
+
+## Payment Processing Fees
+
+- NexaFlow takes a platform fee on every card payment a customer makes through a business's connected Stripe account. `create-invoice-payment` applies `application_fee_amount` (a percentage read from the `PLATFORM_FEE_PERCENT` environment variable) on top of the invoice or milestone amount when creating the Stripe Checkout session. Any new or replacement payment-collection path must apply this same fee — do not build one that skips it.

@@ -8,7 +8,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ## Core / Multi-Tenant
 
-- **businesses** — each customer account using the CRM. The root tenant record; every business-scoped table should ultimately resolve to a row here via business_id. Also confirmed present: default_tax_rate(used when creating a new quote/invoice),stripe_connect_id, stripe_connect_ready, stripe_connect_onboarded (Stripe Connect status, used by Invoicing to gate payment collection).
+- **businesses** — each customer account using the CRM. The root tenant record; every business-scoped table should ultimately resolve to a row here via business_id. Also confirmed present: default_tax_rate(used when creating a new quote/invoice),stripe_connect_id, stripe_connect_ready, stripe_connect_onboarded (Stripe Connect status, used by Invoicing to gate payment collection), dedicated_email (the business's unique inbound-email address; `receive-email` matches inbound mail to a business by this column, and `outbound-email-send` uses it as Reply-To so customer replies land back in Conversations instead of the owner's personal inbox), pdf_settings (jsonb — brand color, accent color, header layout/style, logo size, footer text, disclaimer text, and show/hide toggles for phone/email/website/page numbers/generated date; edited from Settings → Documents and read by `generate-job-form-pdf`).
 - **profiles** — user profiles, linked to businesses. This is the source of truth for a user's `business_id` association (join here for tenant checks, not `users`).
 - **users** — Supabase auth records. Do not assume `business_id` lives here — always resolve via `profiles`.
 - **superusers** — staff admin accounts (elevated access per Business Rules RLS section).

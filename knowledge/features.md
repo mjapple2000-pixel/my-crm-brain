@@ -84,6 +84,13 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `conversations`, `messages`, `platform_settings`
 - **Issues:** None known beyond general `messages` RLS note above.
 
+
+### Outbound Email (Send/Reply via Connected Inbox)
+- **Status:** Built
+- **Description:** Staff replies sent from the Conversations screen route through the `outbound-email-send` edge function: a reply to a Gmail-sourced thread sends via the Gmail API (threaded, `In-Reply-To`/`References` set); a reply to an Outlook-sourced thread sends via Microsoft Graph `createReply` (threaded); everything else falls back to Mailgun, using the business's `dedicated_email` as Reply-To. Also called from Settings for one-off internal notification emails.
+- **Tables:** `oauth_connections`, `messages` (`email_source`), `businesses` (`dedicated_email`)
+- **Issues:** None known from code alone.
+
 ---
 
 ## Calendar / Appointments

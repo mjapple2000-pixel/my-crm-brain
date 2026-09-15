@@ -128,7 +128,6 @@ This file helps AI agents understand our competitive positioning so they don't s
 ### What We Do Differently
 - AI-based missed-call/SMS booking is included in every NexaFlow tier from day one, not gated to the top two plans or sold as a $99/mo add-on the way Jobber's Receptionist is on its Grow plan.
 - Flat, predictable per-business pricing ($97/$297/$497) rather than pricing that changes based on how many users you add to a plan.
-- No offline-access gap in our positioning claims to be verified against our own app's current offline behavior (see open question below) — but if confirmed, this is a real gap in Jobber's field experience we can point to directly.
 
 ---
 

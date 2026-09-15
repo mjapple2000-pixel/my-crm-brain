@@ -240,8 +240,14 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### Gmail Email Sync
 - **Status:** Built
-- **Description:** Business can connect a Gmail account (Growth+ plan) from Settings → Email Config (`_EmailConfigSectionState`, `settings_screen.dart` line 4397). Inbound Gmail messages sync via Google Pub/Sub push (`gmail-inbound-webhook`) with a polling fallback (`gmail-poll-fallback`) and watch renewal (`gmail-watch-renew`), landing in the same `conversations`/`messages` tables as SMS. Server-side gated via `check_plan_feature(business_id, "gmail_sync")` at connect time.
+- **Description:** Business can connect a Gmail account (Growth+ plan) from Settings → Email Config (`_EmailConfigSectionState`, `settings_screen.dart` line 4399). Inbound Gmail messages sync via Google Pub/Sub push (`gmail-inbound-webhook`) with a polling fallback (`gmail-poll-fallback`) and watch renewal (`gmail-watch-renew`), landing in the same `conversations`/`messages` tables as SMS. Server-side gated via `check_plan_feature(business_id, "gmail_sync")` at connect time.
 - **Tables:** `oauth_connections`, `gmail_sync_state`, `pubsub_dedup`, `conversations`, `messages`, `leads`
+- **Issues:** None known from code alone.
+
+### Outlook / Microsoft 365 Email Sync
+- **Status:** Built
+- **Description:** Business can connect an Outlook/Microsoft 365 account (**Pro plan only**, via `check_plan_feature(business_id, "outlook_sync")`) from the same Email Config settings section as Gmail (`_EmailConfigSectionState`, `settings_screen.dart`, Outlook state/handlers starting line 4412, connect call line 4688). OAuth handled by `microsoft-oauth-callback` (scopes: `offline_access`, `Mail.ReadWrite`, `Mail.Send`, `User.Read`). Inbound mail arrives via a Microsoft Graph push subscription to `microsoft-graph-webhook`, renewed every ~3 days by `renew-graph-subscriptions` (Graph subscriptions expire quickly); `reconnect-oauth-connection` handles token re-auth. Lands in the same `conversations`/`messages` tables as Gmail/SMS, including the same abuse-breaker and (per the new AI Draft Reply Review feature above) draft-review logic.
+- **Tables:** `oauth_connections` (provider `'microsoft'`), `email_sync_subscriptions`, `conversations`, `messages`, `leads`
 - **Issues:** None known from code alone.
 
 ### PTO (Paid Time Off)

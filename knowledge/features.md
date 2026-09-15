@@ -425,10 +425,10 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 ## Team / Permissions
 
 ### Team Members
-- **Status:** Built (extent unconfirmed)
-- **Description:** Team member management with permissions, accessible from Settings.
-- **Tables:** Likely `profiles` + role/permission columns — exact model unconfirmed (see `database.md` open items).
-- **Issues:** ⚠️ Data model for permissions not fully documented — confirm before building features that depend on role checks.
+- **Status:** Built
+- **Description:** Team member management with role/permissions, accessible from Settings (`_MyStaffSectionState`, `settings_screen.dart` line 2432). Inviting a member opens `InviteMemberDialog` (`lib/widgets/invite_member_dialog.dart`), which posts to the `invite-member` edge function; `resend-invite` re-sends/regenerates a pending invite. New profile rows default to `role: 'member'` with a `permissions` jsonb column gating: `launchpad`, `contacts`, `pipelines`, `appointments`, `campaigns`, `conversations`, `reporting`, `forms`, `ai_chat`, `automations`, `settings` (each a bool, confirmed at `invite-member/index.ts` lines 112–124). `status` on `profiles` tracks `'pending'` until the invite is accepted.
+- **Tables:** `profiles` (`role`, `permissions`, `status`, `invited_at`)
+- **Issues:** None known from code alone — the previous "data model unconfirmed" gap is resolved by this sync.
 
 ### Superuser Impersonation
 - **Status:** Built

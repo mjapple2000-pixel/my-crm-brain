@@ -108,6 +108,30 @@ This file helps AI agents understand our competitive positioning so they don't s
 
 ---
 
+## Jobber
+
+### Overview
+- Field service management platform for home service trades (landscaping, cleaning, HVAC, plumbing, electrical), positioned similarly to Housecall Pro as the mid-market option below ServiceTitan.
+- Four tiers, priced per-plan with user caps rather than flat per-seat: Core $49/mo (1 user), Connect $139/mo (1 user, jumps to $199–$399/mo for 5–15-user team versions), Grow $199/mo (1 user, $299–$499/mo for 5–15 users), and Plus at custom "Let's chat" pricing for larger teams. Annual prepay cuts these substantially (e.g., Core drops to roughly $29/mo). 14-day free trial on all plans, no long-term contract required outside of optional discounted commitment terms.
+
+### Strengths
+- Very strong satisfaction scores — 4.6/5 on Capterra across 1,462 reviews, with users consistently citing ease of use and the quote-to-job-to-invoice workflow.
+- Native, no-config AI phone/text answering: "Receptionist," launched in 2024, answers inbound calls and texts 24/7, captures lead details, and books jobs directly into the calendar — positioned by Jobber as an AI teammate, not a bolt-on.
+- Deep QuickBooks Online integration and job-costing/profitability tracking on the Grow tier, appealing to operators who've outgrown spreadsheet-level bookkeeping.
+
+### Weaknesses / Complaints
+- **AI Receptionist isn't included until the Grow tier, and even there it's a $99/mo add-on** — it's only bundled at no extra cost on Plus (custom pricing, effectively $499+/mo). A solo operator on Core or Connect gets no AI call answering at all.
+- **No offline mode** — field techs with weak cell service lose access to the calendar and job details, a recurring complaint from reviewers who work in rural service areas.
+- **Time-tracking accuracy issues** reported by multiple reviewers, including one case of ~90 minutes/week of erroneous overtime being logged per employee.
+- **Per-user costs scale fast on team plans** — moving from a 5-user to 15-user Connect or Grow plan roughly doubles the monthly price, and reporting/tagging tools are described by several reviewers as clunky for anything beyond basic lookups.
+
+### What We Do Differently
+- AI-based missed-call/SMS booking is included in every NexaFlow tier from day one, not gated to the top two plans or sold as a $99/mo add-on the way Jobber's Receptionist is on its Grow plan.
+- Flat, predictable per-business pricing ($97/$297/$497) rather than pricing that changes based on how many users you add to a plan.
+- No offline-access gap in our positioning claims to be verified against our own app's current offline behavior (see open question below) — but if confirmed, this is a real gap in Jobber's field experience we can point to directly.
+
+---
+
 ## Positioning Summary
 
 **Our positioning:** Nexaflow sits between GHL's agency-grade complexity and HubSpot's enterprise pricing cliff — purpose-built for a single home service business that needs an AI front desk, not a marketing department's worth of tools.

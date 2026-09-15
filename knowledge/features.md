@@ -293,6 +293,12 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Tables:** `contacts`, `leads`, `conversations`, `deals`, `pipeline_stages`, `messages`, `campaigns`, `campaign_contacts`
 - **Issues:** None known.
 
+### Tax Summary Report
+- **Status:** Built
+- **Description:** New report tab in `reporting_screen.dart` (`_loadTaxSummary`, calling the `get-tax-summary-report` edge function with `date_range_days`/`business_id`), computed directly from the already-documented `invoices` table's tax columns. Not plan-gated — available on all tiers.
+- **Tables:** `invoices`
+- **Issues:** None known from code alone.
+
 ### Job Costing
 - **Status:** Built
 - **Description:** Tracks expenses (labor/material/subcontractor/other) logged against a job (an appointment or a deal) via `log-job-expense`, computes profit margin via `compute-job-cost-snapshot`, and surfaces a report via `get-job-costing-report`. Gated to the **Growth** plan and above via a `check_plan_feature` Postgres RPC (feature key `job_costing`); server returns `{error: "upgrade_required"}` on 403, and both `reporting_screen.dart` and `pipelines_screen.dart` show an in-app upgrade prompt when blocked.

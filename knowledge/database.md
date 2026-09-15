@@ -128,9 +128,10 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 
 ---
 
-## Email (Gmail Sync)
+## Email (Gmail + Outlook Sync)
 
-- **oauth_connections** — a business's connected third-party OAuth account (currently `gmail` only). Confirmed columns (from `gmail-oauth-connect/index.ts` insert, lines 168–180): `business_id`, `provider` ('gmail'), `connected_account_email`, `access_token_secret_id`, `refresh_token_secret_id` (Supabase Vault secret refs), `token_expires_at`, `connection_status` ('active', at minimum), `deleted_at`, `updated_at`.
+- **oauth_connections** — a business's connected third-party OAuth account. Two providers now confirmed: `'gmail'` (from `gmail-oauth-connect/index.ts` insert, lines 168–180) and `'microsoft'` (from `microsoft-oauth-callback/index.ts` insert, line 184 — same shape, different provider value). Confirmed columns: `business_id`, `provider`, `connected_account_email`, `access_token_secret_id`, `refresh_token_secret_id` (Supabase Vault secret refs), `token_expires_at`, `connection_status` ('active', at minimum), `deleted_at`, `updated_at`.
+- **email_sync_subscriptions** — Microsoft-only parallel to `gmail_sync_state` below (the two tables are separate and coexist; `microsoft-*` functions never touch `gmail_sync_state` and vice versa). Tracks the Microsoft Graph push subscription used to notify `microsoft-graph-webhook` of new mail. Confirmed columns (`microsoft-oauth-callback/index.ts` lines 260–263): `oauth_connection_id`, `business_id`, `graph_subscription_id`, `client_state` (echoed back on every Graph push and must be verified — same role as Mailgun's HMAC signature on `receive-email`), `expiration_datetime`, `last_renewed_at`, `deleted_at`, `updated_at`. Renewed by `renew-graph-subscriptions` (Graph mail subscriptions expire after ~3 days).
 - **gmail_sync_state** — tracks Gmail History API sync position per connection. Confirmed columns (from `gmail-oauth-connect/index.ts` and `gmail-inbound-webhook/index.ts`): `oauth_connection_id` (FK → `oauth_connections`), `history_id`, `updated_at`.
 - **pubsub_dedup** — dedup table for Google Pub/Sub push notifications (prevents double-processing the same Gmail push message). Confirmed column: `message_id` (from `gmail-inbound-webhook/index.ts` line 413).
 - **platform_settings** — appears to be a global (non-per-business) settings table read by `gmail-inbound-webhook/index.ts` line 86. Purpose and full column set not yet confirmed — flagging for next pass.

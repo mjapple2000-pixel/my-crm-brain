@@ -17,7 +17,7 @@ These rules are non-negotiable. Any AI agent generating database changes, code, 
 - Superusers (VantageCareTech staff) may have separate elevated policies, but these must be explicit, limited, and documented.
 - Any superuser access that bypasses normal `business_id` scoping should be logged (who, which business, when) where practical.
 - Any new table or schema change must include working RLS policies AND explicit grants (`GRANT ALL TO authenticated`, sequence grants) — enabling RLS alone is not sufficient.
-- Known exceptions (tracked, to be resolved): `conversation_views` has RLS disabled; `messages` table RLS is pending re-enable.
+- `conversation_views` and `messages` RLS were previously tracked exceptions (disabled/pending) — confirmed via live Supabase advisor check as of 9/16 sync: both now have RLS enabled with working policies. No longer an open exception.
 
 ## IDs
 

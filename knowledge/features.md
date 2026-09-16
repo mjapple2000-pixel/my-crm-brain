@@ -64,7 +64,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Save and reuse conversation filter configurations.
 - **Tables:** `conversation_views`
-- **Issues:** ⚠️ RLS currently disabled, no confirmed `business_id`/`user_id` scoping — tracked exception, needs fix before relying on this for multi-tenant safety.
+- **Issues:** RLS confirmed enabled as of 9/16 check, scoped by `business_id`. Not scoped by `user_id` — any staff member at a business can see all of that business's saved filter views, not just their own.
 
 ### Snippets (Canned Replies)
 - **Status:** Built

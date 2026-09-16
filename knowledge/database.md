@@ -35,7 +35,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 - **messages** — individual messages. `business_id` required. RLS confirmed enabled with a real `business_id`-scoped policy as of 9/16 database check.
 - **support_chats** — support conversations with staff. Scoped to business + superuser visibility.
 - **support_tickets** — support ticket records. Scoped to business + superuser visibility.
-- **snippets** — saved canned-reply text. `business_id` confirmed present in insert code (`snippets_screen.dart`). RLS policy status unverified — migration files now exist in the repo (`supabase/migrations/`, 7 files) but none of them touch this table, so dashboard verification is still needed.
+- **snippets** — saved canned-reply text. `business_id` confirmed present in insert code (`snippets_screen.dart`). RLS confirmed enabled with a `business_id`-scoped policy as of 9/16 database check.
 
 ---
 

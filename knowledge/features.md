@@ -52,7 +52,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Full GHL-style conversations screen — message type filter chips, conversation tags (pills + editor), DND toggle (banner + disabled reply box), search with result count, header checkbox multi-select, right-side contact panel, assignment dropdown, internal notes (Reply/Note tabs), starred conversations, bulk actions (long-press).
 - **Tables:** `conversations`, `messages`
-- **Issues:** ⚠️ `messages` RLS pending re-enable (tracked exception).
+- **Issues:** None known — `messages` RLS confirmed enabled as of 9/16 check.
 
 ### AI Draft Reply Review (Email)
 - **Status:** Built

@@ -244,7 +244,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Two-function Twilio flow. `handle-inbound-call` receives the call via webhook, looks up the business by `ai_phone_number`, logs to `call_logs`, and dials the owner's real phone (`owner_phone`) for 20 seconds. `handle-call-status` fires on the Dial action callback — if the owner didn't answer (no-answer / busy / failed / canceled), it sends a missed-call SMS to the caller using the business's `missed_call_text_message` template, then logs the outbound SMS to `messages` and creates/updates the `conversations` record so it appears in the inbox.
 - **Tables:** `call_logs`, `conversations`, `messages`, `businesses` (reads `ai_phone_number`, `owner_phone`, `missed_call_text_message`, `business_name`)
-- **Issues:** "Confirm RLS status and whether reply_sent deduplication is working correctly end-to-end."
+- **Issues:** None known — RLS on `call_logs` confirmed enabled, and `reply_sent` dedup confirmed correct (atomic conditional update, `.eq('reply_sent', false)`) as of 9/16 check.
 
 ### Gmail Email Sync
 - **Status:** Built

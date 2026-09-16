@@ -70,7 +70,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Saved quick-reply text, inserted via click into reply box.
 - **Tables:** `snippets`
-- **Issues:** `business_id` confirmed present — insert in `snippets_screen.dart` includes it. RLS policy correctness cannot be verified from code alone (no migrations folder); needs Supabase dashboard check.
+- **Issues:** None known — RLS confirmed enabled and `business_id`-scoped as of 9/16 check.
   
 ### Active Automations Sidebar
 - **Status:** Built

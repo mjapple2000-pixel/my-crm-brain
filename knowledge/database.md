@@ -195,7 +195,7 @@ Project ref: `rllriopqojaraceytdno` (us-east-1)
 When proposing schema changes, treat the following as **known debt, not acceptable patterns to replicate**:
 1. `conversation_views` — resolved, RLS confirmed enabled (9/16 database check)
 2. `messages` — resolved, RLS confirmed enabled (9/16 database check)
-3. `snippets` and `trigger_links` — `business_id` column confirmed present in app code. RLS policy correctness still needs Supabase dashboard verification.
+3. `snippets`, `trigger_links`, `call_logs` — resolved, RLS confirmed enabled with `business_id`-scoped policies (9/16 database check).
 4. `deals` — `contact_id` FK debt resolved; now uses `lead_id` FK referencing `leads` table.
-5. `employee_hub_tokens`, `job_forms`, `job_form_submissions`, `job_types`, `phone_numbers`, `routes`, `team_locations`, `time_entries`, `service_menu_items`, `stripe_connect_accounts` — RLS status unverified, same as `snippets`/`trigger_links`/`call_logs` above. Migration files now exist in the repo but none touch these tables. Check Supabase dashboard before treating any of these as a template for new tables.
+5. `employee_hub_tokens`, `job_forms`, `job_form_submissions`, `job_types`, `phone_numbers`, `routes`, `team_locations`, `time_entries`, `service_menu_items`, `stripe_connect_accounts` — resolved, all confirmed RLS-enabled with real tenant-isolation policies (9/16 database check). Note: `routes` and `team_locations` policies also require `profiles.role = 'owner'` or `profiles.permissions->>'route_management' = true`, not just matching `business_id` — a plain staff member without that permission can't see them even within their own business.
 Do not copy these patterns into new tables. New tables must follow Business Rules in full from creation.

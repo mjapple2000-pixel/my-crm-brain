@@ -185,7 +185,7 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 - **Status:** Built
 - **Description:** Visual automation builder. Confirmed trigger types (`automations_screen.dart` `_triggerLabel`, line 319): `new_lead`, `email_received`, `form_submitted`, `appointment_booked`, `status_changed`, `appointment_completed`, `job_form_completed`, `referral_converted`, `quote_not_responded`. Confirmed action types (`_actionLabel`, now at line 1274): `send_sms`, `send_email`, `add_tag`, `move_pipeline_stage`, `notify_owner`, `send_review_request`, `send_job_followup`, `wait_until`, `delay_relative_to_appointment`. `send_job_followup` ("Send Job Follow-Up") is gated server-side via `check_plan_feature(business_id, "job_followup")` (confirmed `run-automation/index.ts` line 260) — the only action type with its own plan gate.
 - **Tables:** `automations`
-- **Issues:** None known.
+- **Issues:** ⚠️ `notify_owner` does not fire when reached via a delayed/scheduled step (i.e. after a `wait_until` or `delay_relative_to_appointment` action). `process-scheduled-automations/index.ts` line 91 has a placeholder that logs and skips: "notify_owner via Make webhook not wired in cron context yet." It works fine when triggered immediately (not after a delay) via `run-automation`.
 
 ### Automation Execution
 - **Status:** Built

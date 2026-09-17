@@ -260,8 +260,8 @@ Status values: **Built** / **In Progress** / **Planned** / **Not Started**
 
 ### PTO (Paid Time Off)
 - **Status:** Built
-- **Description:** Employees request time off from `/settings/my-pto` (`employee_pto_screen.dart`); owners/admins set policy at `/settings/pto-policy` and approve/deny at `/settings/pto-requests`. Approved PTO hours feed into timesheets, PDF exports, and QuickBooks payroll hours sync. Gated client-side only via `check_plan_feature(business_id, "pto_tracking")` — no edge function that reads/writes `pto_requests` calls it server-side.
-- **Tables:** `pto_requests`
+- **Description:** Employees request time off from `/settings/my-pto` (`employee_pto_screen.dart`); owners/admins set policy at `/settings/pto-policy` and approve/deny at `/settings/pto-requests`. Approved PTO hours feed into timesheets, PDF exports, and QuickBooks payroll hours sync. Each employee has a running `pto_balances` row (accrual rate + hours available); every change to it — a manual edit or a request approval — writes an immutable row to `pto_balance_adjustments` with the before/after balance and who made the change. Gated client-side only via `check_plan_feature(business_id, "pto_tracking")` — no edge function that reads/writes any of these tables calls it server-side.
+- **Tables:** `pto_requests`, `pto_balances`, `pto_balance_adjustments`
 - **Issues:** ⚠️ No server-side plan enforcement — same gap as AI Form Recreation. See Open Questions.
 
 ### Overtime Tracking / Payroll Settings
